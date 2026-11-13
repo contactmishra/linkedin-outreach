@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="t d">
+  <title id="t">Architecture</title>
+  <desc id="d">On your computer: you, the Outreach Desk dashboard, the local server with your data, Claude Code with the skill, and a Playwright browser logged in to LinkedIn. Outside: LinkedIn, optional Apollo, and the Claude model.</desc>
+  <style>
+    .f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+    .m{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+    .t{font-size:18px;font-weight:800;fill:#15211D}
+    .s{font-size:13px;fill:#5B6B65}
+    .l{font-size:12px;font-weight:600;fill:#3E5A51}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5E8C7E"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="640" rx="24" fill="#F3F5F4"/>
+  <text x="48" y="58" class="f" font-size="13" font-weight="700" letter-spacing="2" fill="#5B6B65">ARCHITECTURE</text>
+  <text x="48" y="90" class="f" font-size="26" font-weight="800" fill="#15211D">Everything that matters stays on your computer</text>
+
+  <!-- your computer boundary -->
+  <rect x="40" y="116" width="820" height="496" rx="18" fill="#FFFFFF" fill-opacity="0.55" stroke="#1F6B57" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="60" y="104" width="150" height="24" rx="12" fill="#1F6B57"/>
+  <text x="135" y="121" class="f" font-size="12" font-weight="800" letter-spacing="1.5" fill="#FFFFFF" text-anchor="middle">YOUR COMPUTER</text>
+
+  <g class="f">
+    <!-- You -->
+    <rect x="72" y="150" width="236" height="104" rx="14" fill="#15211D"/>
+    <text x="92" y="186" font-size="18" font-weight="800" fill="#FFFFFF">You</text>
+    <text x="92" y="210" font-size="13" fill="#C9D6D1">approve · edit · drag cards</text>
+    <text x="92" y="230" font-size="13" fill="#C9D6D1">press Run changes</text>
+
+    <!-- Dashboard -->
+    <rect x="72" y="304" width="236" height="112" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <rect x="72" y="304" width="236" height="8" rx="4" fill="#1F6B57"/>
+    <text x="92" y="342" class="t">Outreach Desk</text>
+    <text x="92" y="364" class="s">dashboard in your browser</text>
+    <text x="92" y="386" class="m" font-size="12" fill="#1F6B57">localhost:4877</text>
+
+    <!-- Server + data -->
+    <rect x="72" y="466" width="236" height="122" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <text x="92" y="502" class="t">Local server</text>
+    <text x="92" y="524" class="m" font-size="12" fill="#3E5A51">server.py · store.py</text>
+    <text x="92" y="546" class="m" font-size="12" fill="#3E5A51">data/db.json · profile.md</text>
+    <text x="92" y="568" class="s">git-ignored, never uploaded</text>
+
+    <!-- Claude Code -->
+    <rect x="416" y="150" width="268" height="150" rx="14" fill="#FFFFFF" stroke="#1F6B57" stroke-width="2"/>
+    <text x="436" y="188" class="t">Claude Code</text>
+    <rect x="436" y="200" width="168" height="24" rx="12" fill="#DCEDE6"/>
+    <text x="520" y="217" font-size="12" font-weight="700" fill="#1F6B57" text-anchor="middle">linkedin-outreach skill</text>
+    <text x="436" y="248" class="s">finds people · writes drafts</text>
+    <text x="436" y="268" class="s">tracks · follows the limits</text>
+
+    <!-- Playwright -->
+    <rect x="416" y="372" width="268" height="122" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <text x="436" y="410" class="t">Playwright browser</text>
+    <text x="436" y="434" class="s">a visible window, you log in</text>
+    <text x="436" y="454" class="s">yourself; human-paced clicks</text>
+    <text x="436" y="474" class="s">no password, no cookies taken</text>
+
+    <!-- Outside -->
+    <rect x="924" y="150" width="308" height="110" rx="14" fill="#FFFFFF" stroke="#D5DCD9" stroke-dasharray="5 4"/>
+    <text x="944" y="188" class="t">Apollo.io</text>
+    <text x="1040" y="188" font-size="12" font-weight="700" fill="#A9650B">optional</text>
+    <text x="944" y="212" class="s">people by company, title, country</text>
+    <text x="944" y="232" class="s">free search, no enrichment</text>
+
+    <rect x="924" y="372" width="308" height="110" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <text x="944" y="410" class="t">LinkedIn</text>
+    <text x="944" y="434" class="s">connection requests, messages,</text>
+    <text x="944" y="454" class="s">acceptances and replies</text>
+
+    <rect x="924" y="520" width="308" height="76" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <text x="944" y="552" class="t">Claude model</text>
+    <text x="944" y="574" class="s">the thinking behind Claude Code</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#5E8C7E" stroke-width="2" fill="none" marker-end="url(#a)">
+    <line x1="190" y1="254" x2="190" y2="300"/>
+    <line x1="190" y1="416" x2="190" y2="462"/>
+    <line x1="210" y1="462" x2="210" y2="420" />
+    <path d="M416 260 C 360 260, 360 520, 312 520"/>
+    <path d="M312 548 C 380 548, 390 300, 470 304"/>
+    <line x1="550" y1="300" x2="550" y2="368"/>
+    <line x1="684" y1="433" x2="920" y2="433"/>
+    <line x1="684" y1="205" x2="920" y2="205"/>
+    <path d="M684 280 C 800 280, 800 558, 920 558"/>
+  </g>
+  <g class="f">
+    <text x="200" y="282" class="l">approve</text>
+    <text x="120" y="444" class="l">saves</text>
+    <text x="218" y="444" class="l">live</text>
+    <rect x="322" y="372" width="76" height="20" rx="4" fill="#F3F5F4"/>
+    <text x="328" y="386" class="l">store.py</text>
+    <rect x="318" y="580" width="160" height="20" rx="4" fill="#F3F5F4"/>
+    <text x="324" y="594" class="l">Run changes wakes Claude</text>
+    <text x="560" y="340" class="l">drives</text>
+    <text x="726" y="424" class="l">requests · messages</text>
+    <text x="726" y="196" class="l">Apollo MCP</text>
+    <text x="726" y="510" class="l">prompts</text>
+  </g>
+</svg>

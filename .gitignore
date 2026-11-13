@@ -1,0 +1,9 @@
+# Private: contacts, profile, backups, logs
+data/
+# Built locally by install.py
+*.app/
+# Python and browser leftovers
+__pycache__/
+*.pyc
+.playwright-mcp/
+.DS_Store

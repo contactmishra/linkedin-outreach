@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outreach Desk</title>
+<style>
+/* Layout: a working desk. Summary strip (funnel + week meter) on top, "due today" beside the contact table, detail opens in a side drawer. */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --sunk:#E9EDEB; --line:#D5DCD9;
+  --fg:#15211D; --muted:#5B6B65; --accent:#1F6B57; --accent-soft:#DCEDE6;
+  --good:#1E7A4C; --good-soft:#DDF1E5; --warn:#A9650B; --warn-soft:#F8EAD3;
+  --crit:#B3372B; --crit-soft:#F7DEDA; --info:#2C5C8F; --info-soft:#DEE8F4;
+  --idle:#6D7974; --idle-soft:#E6EAE8;
+  --display:-apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --body:-apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1513; --surface:#161E1B; --sunk:#1D2723; --line:#2B3833;
+  --fg:#E4ECE8; --muted:#93A39C; --accent:#5FBF9F; --accent-soft:#1D3A31;
+  --good:#5CC48C; --good-soft:#183527; --warn:#E3A44A; --warn-soft:#3A2C15;
+  --crit:#EE7F72; --crit-soft:#3E1F1B; --info:#7FAEE0; --info-soft:#1B2C40;
+  --idle:#8E9B95; --idle-soft:#232D29; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1513; --surface:#161E1B; --sunk:#1D2723; --line:#2B3833;
+  --fg:#E4ECE8; --muted:#93A39C; --accent:#5FBF9F; --accent-soft:#1D3A31;
+  --good:#5CC48C; --good-soft:#183527; --warn:#E3A44A; --warn-soft:#3A2C15;
+  --crit:#EE7F72; --crit-soft:#3E1F1B; --info:#7FAEE0; --info-soft:#1B2C40;
+  --idle:#8E9B95; --idle-soft:#232D29; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.wrap>*{min-width:0}
+html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.45}
+.wrap{max-width:1240px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:grid;gap:18px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:24px;font-weight:700;letter-spacing:-.01em}
+h2{font-size:15px;font-weight:600}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.sub{color:var(--muted);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .c{font-family:var(--mono);opacity:.7;margin-left:6px}
+
+.hright{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+.runbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:7px 14px;font-weight:600;font-size:13px}
+.runbtn .d{width:8px;height:8px;border-radius:50%;background:var(--idle)}
+.runbtn.ready{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.runbtn.ready .d{background:var(--surface)}
+.runbtn.waiting{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)} .runbtn.waiting .d{background:var(--warn)}
+.runbtn.running{background:var(--info-soft);border-color:var(--info);color:var(--info)} .runbtn.running .d{background:var(--info)}
+@media (prefers-reduced-motion: no-preference){
+  .runbtn.ready{animation:glow 1.8s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 0%,transparent),0 0 18px 2px color-mix(in srgb,var(--accent) 45%,transparent)}}
+  .runbtn.running .d{animation:blink 1s steps(2) infinite} @keyframes blink{50%{opacity:.2}}}
+@media (prefers-reduced-motion: reduce){.runbtn.ready{box-shadow:0 0 0 3px var(--accent-soft)}}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 32px));max-height:calc(100% - 48px);overflow-y:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;z-index:22;display:grid;gap:14px}
+.modal ol{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13px}
+.modal .cmd{display:flex;gap:8px;align-items:center;background:var(--sunk);border-radius:8px;padding:10px 12px;font-family:var(--mono);font-size:13px;overflow-wrap:anywhere}
+.modal .cmd span{flex:1;min-width:0}
+.modal .step{display:grid;gap:6px;font-size:13px}
+.modal .step b{font-size:13px}
+.fld{display:grid;gap:4px;font-size:12px;color:var(--muted);min-width:0}
+.fld input,.fld select{border:1px solid var(--line);background:var(--bg);border-radius:7px;padding:7px 9px;font-size:14px;color:var(--fg);width:100%}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.banner{border-radius:var(--r);padding:10px 14px;font-size:13px;background:var(--warn-soft);color:var(--warn)}
+
+/* funnel */
+.summary{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.funnel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:12px}
+.stage{display:grid;gap:4px;align-content:start}
+.stage .bar{height:8px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.stage .bar i{display:block;height:100%;background:var(--accent)}
+.stage .n{font-family:var(--mono);font-size:24px;font-weight:500;line-height:1.1}
+.stage .l{font-size:12px;color:var(--muted)}
+.stage .p{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.meter{display:grid;gap:8px;margin-top:12px}
+.meter .track{height:10px;border-radius:5px;background:var(--sunk);overflow:hidden;position:relative}
+.meter .track i{display:block;height:100%;background:var(--accent)}
+.meter .track.over i{background:var(--warn)}
+.meter .big{font-family:var(--mono);font-size:24px}
+.kv{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+/* main */
+.main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr);gap:14px;align-items:start}
+.due{display:grid;gap:8px;margin-top:10px}
+.dueitem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;text-align:left;width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+.dueitem:hover{border-color:var(--accent)}
+.dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--idle)}
+.dot.crit{background:var(--crit)} .dot.warn{background:var(--warn)} .dot.good{background:var(--good)} .dot.info{background:var(--info)}
+.dueitem b{display:block;font-weight:600;overflow-wrap:anywhere}
+.dueitem span{font-size:12px;color:var(--muted)}
+.empty{color:var(--muted);font-size:13px;padding:10px 0}
+
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.search{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 10px;min-width:0;width:220px;max-width:100%}
+.statusfilter{display:flex;flex-wrap:wrap;gap:4px}
+.sf{border:0;background:transparent;border-radius:6px;padding:4px 8px;font-size:12px;color:var(--muted)}
+.sf[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--bg)}
+.who b{display:block;font-weight:600}
+.who span{display:block;font-size:12px;color:var(--muted);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600;white-space:nowrap}
+.s-found,.s-done{background:var(--idle-soft);color:var(--idle)}
+.s-requested{background:var(--info-soft);color:var(--info)}
+.s-accepted{background:var(--warn-soft);color:var(--warn)}
+.s-thanked,.s-cv_sent,.s-followed_up{background:var(--accent-soft);color:var(--accent)}
+.s-replied{background:var(--good-soft);color:var(--good)}
+.s-stale,.s-blacklisted{background:var(--crit-soft);color:var(--crit)}
+.grp{font-size:12px;color:var(--muted)}
+.next{font-size:12px}
+.next .when{display:block;font-family:var(--mono);color:var(--muted)}
+.next .when.late{color:var(--crit)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.28);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:21;overflow-y:auto;
+  padding-top:calc(18px + env(safe-area-inset-top, 0px));padding-bottom:calc(32px + env(safe-area-inset-bottom, 0px));padding-left:20px;padding-right:max(20px, env(safe-area-inset-right, 0px));display:grid;gap:16px;align-content:start}
+@media (prefers-reduced-motion: no-preference){.drawer{animation:slide .18s cubic-bezier(.2,.8,.2,1)}@keyframes slide{from{transform:translateX(24px);opacity:.6}}}
+.dhead{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.dhead a{color:var(--accent);font-size:13px}
+.x{border:1px solid var(--line);background:var(--bg);border-radius:8px;width:34px;height:34px;flex:none}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;font-size:13px}
+.facts dt{color:var(--muted)} .facts dd{margin:0;overflow-wrap:anywhere}
+.common{background:var(--accent-soft);border-radius:8px;padding:10px 12px;font-size:13px}
+.draft{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:8px}
+.draft header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.draft textarea{width:100%;min-height:120px;resize:vertical;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:8px;line-height:1.5}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:6px 11px;font-size:13px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.tag{font-size:11px;font-weight:600;border-radius:5px;padding:2px 7px}
+.tag.ok{background:var(--good-soft);color:var(--good)} .tag.wait{background:var(--idle-soft);color:var(--idle)} .tag.sent{background:var(--info-soft);color:var(--info)}
+.hist{display:grid;gap:6px;font-size:12px;color:var(--muted);border-left:2px solid var(--line);padding-left:12px}
+.hist b{color:var(--fg);font-weight:500}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom, 0px));background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px;z-index:30}
+
+/* board */
+.views{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.views button{border:0;background:var(--surface);padding:6px 14px;font-size:13px}
+.views button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:10px;overflow-x:auto;padding-bottom:8px}
+.col{background:var(--sunk);border-radius:var(--r);padding:8px;display:grid;gap:6px;align-content:start;min-height:240px;border:2px dashed transparent}
+.col.over{border-color:var(--accent);background:var(--accent-soft)}
+.col.blk.over{border-color:var(--crit);background:var(--crit-soft)}
+.col h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:flex;justify-content:space-between;padding:4px 4px 6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:grab;display:grid;gap:2px;text-align:left;width:100%}
+.card:active{cursor:grabbing}
+.card.dragging{opacity:.4}
+.card b{font-weight:600;font-size:13px}
+.card span{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .late{color:var(--crit)}
+.hint{font-size:12px;color:var(--muted)}
+@media (max-width:900px){.summary,.main{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.funnel{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:14px}.search{width:100%}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Job search · LinkedIn outreach</div>
+      <h1>Outreach Desk</h1>
+      <div class="sub" id="updated">Loading your pipeline…</div>
+    </div>
+    <div class="hright">
+      <div class="chips" id="countries" role="group" aria-label="Country campaign"></div>
+      <button class="runbtn" id="runBtn" title="Send your approved changes to Claude"><i class="d"></i><span id="runLabel">Nothing to run</span></button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="summary">
+    <div class="panel">
+      <h2>Pipeline</h2>
+      <div class="funnel" id="funnel"></div>
+    </div>
+    <div class="panel">
+      <h2>Invites, last 7 days</h2>
+      <div class="meter" id="meter"></div>
+    </div>
+  </section>
+
+  <div class="tools" style="margin:0"><div class="views" role="group" aria-label="View">
+    <button id="vTable" aria-pressed="true">Table</button><button id="vBoard" aria-pressed="false">Board</button></div>
+    <span class="hint" id="boardHint" hidden>Drag a card to another column to change its stage. Drop on Blacklist to stop approaching someone.</span></div>
+
+  <section class="panel" id="boardPanel" hidden><div class="board" id="board"></div></section>
+
+  <section class="main" id="tablePanel">
+    <div class="panel">
+      <h2>Due now</h2>
+      <div class="due" id="due"></div>
+    </div>
+    <div class="panel">
+      <div class="tools">
+        <div class="statusfilter" id="statusfilter" role="group" aria-label="Filter by status"></div>
+        <div class="btns"><input class="search" id="search" type="search" placeholder="Search name, company, title" aria-label="Search contacts"><button class="btn" id="addBtn">+ Add person</button></div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Person</th><th>Company</th><th>Group</th><th>Status</th><th>Next step</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="tableEmpty" hidden></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="tools" style="margin-bottom:4px"><h2>Blacklist <span class="sub num" id="blCount"></span></h2>
+      <span class="sub">Never approached again. Claude skips them in every Apollo campaign.</span></div>
+    <div class="empty" id="blEmpty">Nobody yet. Open a stale invite and click "Withdraw and blacklist", or blacklist anyone from their card.</div>
+    <div class="tablewrap" id="blWrap" hidden>
+      <table><thead><tr><th>Person</th><th>Reason</th><th>Since</th><th>On LinkedIn</th><th></th></tr></thead><tbody id="blRows"></tbody></table>
+    </div>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Contact detail"></aside>
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="runModal" hidden role="dialog" aria-labelledby="runTitle"></div>
+<form class="modal" id="addModal" hidden role="dialog" aria-labelledby="addTitle" autocomplete="off">
+  <div class="dhead"><h2 id="addTitle" style="font-size:18px">Add a person</h2><button type="button" class="x" id="addClose" aria-label="Close">✕</button></div>
+  <label class="fld">Name<input id="fName" required></label>
+  <label class="fld">LinkedIn profile URL<input id="fUrl" type="url" placeholder="https://www.linkedin.com/in/…"></label>
+  <label class="fld">Title / headline<input id="fHead"></label>
+  <div class="frow"><label class="fld">Company<input id="fCo"></label><label class="fld">Country<input id="fCountry"></label></div>
+  <div class="frow"><label class="fld">Group<select id="fGroup"><option value="peer">Peer</option><option value="lead">Team lead</option><option value="recruiter">Recruiter</option><option value="other">Other</option></select></label>
+    <label class="fld">Status<select id="fStatus"><option value="found">To request</option><option value="requested">Request already sent</option><option value="accepted">Already connected</option></select></label></div>
+  <div class="btns"><button class="btn primary" type="submit">Add to the desk</button><span class="sub" id="addMsg"></span></div>
+</form>
+
+<script>
+const STATUSES = [
+  ["found","Found"],["requested","Requested"],["accepted","Accepted"],["thanked","Thanked"],
+  ["cv_sent","CV sent"],["followed_up","Followed up"],["replied","Replied"],["done","Done"],["stale","Stale"],["blacklisted","Blacklisted"]
+];
+const LABEL = Object.fromEntries(STATUSES);
+const FUNNEL = [["requested","Requested"],["accepted","Accepted"],["thanked","Thanked"],["cv_sent","CV sent"],["followed_up","Followed up"],["replied","Replied"]];
+const ORDER = {found:0,requested:1,accepted:2,thanked:3,cv_sent:4,followed_up:5,replied:6,done:5,stale:1,blacklisted:1};
+const GROUPS = {peer:"Peer",lead:"Team lead",recruiter:"Recruiter",other:"Other"};
+const DRAFTS = [["thanks","Thank-you message"],["cv","CV message"],["followup","Follow-up"]];
+const DEFAULTS = {cvDelayDays:3, followUpDays:7, closeDays:7, staleDays:21, weeklyCap:80, dailyCap:15};
+
+let canWrite=true, contacts=[], settings={...DEFAULTS}, meta={};
+let country="all", status="all", query="", openId=null, loaded=false;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const day = 864e5;
+const t = d => d ? new Date(d).getTime() : NaN;
+const fmt = d => { const x=new Date(d); return isNaN(x) ? "" : x.toLocaleDateString(undefined,{day:"numeric",month:"short"}); };
+const rel = ms => { const d=Math.round((ms-Date.now())/day); return d===0?"today":d>0?`in ${d}d`:`${-d}d overdue`; };
+
+function nextStep(c){
+  const s=settings, now=Date.now();
+  switch(c.status){
+    case "found": return {text:"Send connection request", due:now, tone:"info"};
+    case "requested": {
+      const d=t(c.requestedAt)+s.staleDays*day;
+      return d<now ? {text:"Stale: withdraw and blacklist", due:d, tone:"crit"}
+                   : {text:"Waiting for acceptance", due:d, tone:"idle", passive:true};
+    }
+    case "stale": return {text:"Withdraw and blacklist", due:t(c.requestedAt)+s.staleDays*day, tone:"crit"};
+    case "accepted": return {text:"Send thank-you", due:t(c.acceptedAt)||now, tone:"warn"};
+    case "thanked": return {text:"Send CV message", due:t(c.thankedAt)+s.cvDelayDays*day, tone:"info"};
+    case "cv_sent": return {text:"Send follow-up if no reply", due:t(c.cvSentAt)+s.followUpDays*day, tone:"info"};
+    case "followed_up": return {text:"Close if no reply", due:t(c.followUpAt)+s.closeDays*day, tone:"idle"};
+    case "replied": return {text:"Answer the reply yourself", due:t(c.repliedAt)||now, tone:"good"};
+    default: return null;
+  }
+}
+
+function inCountry(c){ return country==="all" || (c.country||"Unknown")===country; }
+
+function render(){
+  const active = contacts.filter(c=>c.status!=="blacklisted");
+  const scoped = active.filter(inCountry);
+  // countries
+  const counts = {}; active.forEach(c=>{const k=c.country||"Unknown"; counts[k]=(counts[k]||0)+1;});
+  const names = Object.keys(counts).sort();
+  $("countries").innerHTML = [["all","All",active.length],...names.map(n=>[n,n,counts[n]])]
+    .map(([k,l,n])=>`<button class="chip" data-country="${esc(k)}" aria-pressed="${k===country}">${esc(l)}<span class="c">${n}</span></button>`).join("");
+
+  // funnel: count people who reached each stage
+  const reached = k => scoped.filter(c => (ORDER[c.status]??0) >= ORDER[k] && !(c.status==="stale" && k!=="requested") && !(c.status==="done" && ORDER[k]>5)).length;
+  const base = Math.max(1, reached("requested"));
+  $("funnel").innerHTML = FUNNEL.map(([k,l],i)=>{
+    const n=reached(k), prev=i?reached(FUNNEL[i-1][0]):n;
+    const pct = i? (prev? Math.round(n/prev*100):0) : null;
+    return `<div class="stage"><div class="bar"><i style="width:${Math.round(n/base*100)}%"></i></div>
+      <div class="n">${n}</div><div class="l">${l}</div><div class="p">${pct===null?"&nbsp;":pct+"% of previous"}</div></div>`;
+  }).join("");
+
+  // weekly meter (all countries: the cap is per account)
+  const wk = contacts.filter(c=>t(c.requestedAt) > Date.now()-7*day).length;
+  const today = contacts.filter(c=>new Date(c.requestedAt).toDateString()===new Date().toDateString()).length;
+  const cap = settings.weeklyCap;
+  $("meter").innerHTML = `<div class="big num">${wk}<span class="sub"> / ${cap}</span></div>
+    <div class="track ${wk>cap?"over":""}"><i style="width:${Math.min(100,wk/cap*100)}%"></i></div>
+    <div class="kv"><span>Today</span><span class="num">${today} / ${settings.dailyCap}</span></div>
+    <div class="kv"><span>Acceptance rate</span><span class="num">${acceptRate(contacts.filter(inCountry))}</span></div>
+    <div class="kv"><span>Pending invites</span><span class="num">${scoped.filter(c=>c.status==="requested").length}</span></div>`;
+
+  // due list
+  const due = scoped.map(c=>({c,n:nextStep(c)})).filter(x=>x.n && !x.n.passive && x.n.due <= Date.now()+day)
+    .sort((a,b)=>a.n.due-b.n.due);
+  $("due").innerHTML = due.length ? due.slice(0,30).map(({c,n})=>`<button class="dueitem" data-id="${esc(c.id)}">
+      <i class="dot ${n.tone}"></i><div><b>${esc(n.text)}</b><span>${[c.name,c.company,rel(n.due)].filter(Boolean).map(esc).join(" · ")}</span></div></button>`).join("")
+    : `<div class="empty">${loaded? (contacts.length? "Nothing due. Pending invites are waiting for acceptance." : "Nothing yet. Ask Claude to run today's outreach.") : "Loading…"}</div>`;
+
+  // status filter
+  const sc={}; scoped.forEach(c=>sc[c.status]=(sc[c.status]||0)+1);
+  $("statusfilter").innerHTML = [["all","All",scoped.length],...STATUSES.filter(([k])=>sc[k]).map(([k,l])=>[k,l,sc[k]])]
+    .map(([k,l,n])=>`<button class="sf" data-status="${k}" aria-pressed="${k===status}">${l} <span class="num">${n}</span></button>`).join("");
+
+  // table
+  const q=query.trim().toLowerCase();
+  const rows = scoped.filter(c=>(status==="all"||c.status===status) &&
+      (!q || [c.name,c.company,c.headline,c.role].join(" ").toLowerCase().includes(q)))
+    .sort((a,b)=>(nextStep(a)?.due??Infinity)-(nextStep(b)?.due??Infinity));
+  $("rows").innerHTML = rows.map(c=>{const n=nextStep(c); return `<tr class="row" data-id="${esc(c.id)}" tabindex="0">
+    <td class="who"><b>${esc(c.name)}</b><span>${esc(c.headline||c.role||"")}</span></td>
+    <td>${esc(c.company||"")}<div class="grp">${esc(c.country||"")}</div></td>
+    <td class="grp">${esc(GROUPS[c.group]||"")}</td>
+    <td><span class="pill s-${esc(c.status)}">${esc(LABEL[c.status]||c.status)}</span></td>
+    <td class="next">${n?esc(n.text):"–"}${n&&!isNaN(n.due)?`<span class="when ${n.due<Date.now()-day&&!n.passive?"late":""}">${n.passive?"stale "+rel(n.due):rel(n.due)}</span>`:""}</td></tr>`;}).join("");
+  // blacklist
+  const bl = contacts.filter(c=>c.status==="blacklisted").sort((a,b)=>t(b.blacklistedAt)-t(a.blacklistedAt));
+  $("blCount").textContent = bl.length ? `${bl.length} ${bl.length===1?"person":"people"}` : "";
+  $("blRows").innerHTML = bl.map(c=>`<tr class="row" data-id="${esc(c.id)}" tabindex="0">
+    <td class="who"><b>${esc(c.name)}</b><span>${esc(c.headline||"")}</span></td>
+    <td class="grp">${esc(c.blacklistReason||"")}</td>
+    <td class="num grp">${c.blacklistedAt?fmt(c.blacklistedAt):""}</td>
+    <td>${c.withdrawPending?`<span class="pill s-accepted">Withdrawal queued</span>`:c.withdrawnAt?`<span class="pill s-done">Withdrawn ${fmt(c.withdrawnAt)}</span>`:`<span class="grp">No open request</span>`}</td>
+    <td><button class="btn" data-restore="${esc(c.id)}" ${canWrite?"":"disabled"}>Restore</button></td></tr>`).join("");
+  $("blWrap").hidden = !bl.length; $("blEmpty").hidden = bl.length>0;
+
+  $("tableEmpty").hidden = rows.length>0 || !loaded;
+  $("tableEmpty").textContent = contacts.length ? "No contacts match this filter." : "No contacts yet. When Claude checks LinkedIn or imports leads from Apollo, they appear here.";
+
+  $("updated").textContent = loaded ? (meta.lastRun ? `Last run by Claude: ${new Date(meta.lastRun).toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})}${meta.lastRunNote?" · "+meta.lastRunNote:""}` : "Waiting for Claude's first run") : "Loading your pipeline…";
+  renderBoard(active);
+  if(openId) renderDrawer();
+}
+
+const COLS=[["found","To request"],["requested","Requested"],["accepted","Accepted"],["thanked","Thanked"],["cv_sent","CV sent"],["followed_up","Followed up"],["replied","Replied"],["done","Done"],["stale","Stale"]];
+const STAMP={accepted:"acceptedAt",thanked:"thankedAt",cv_sent:"cvSentAt",followed_up:"followUpAt",replied:"repliedAt",requested:"requestedAt"};
+let view="table";
+function renderBoard(active){
+  if(view!=="board") return;
+  const q=query.trim().toLowerCase();
+  const list=active.filter(inCountry).filter(c=>!q||[c.name,c.company,c.headline].join(" ").toLowerCase().includes(q));
+  const bl=contacts.filter(c=>c.status==="blacklisted").length;
+  $("board").innerHTML = COLS.filter(([k])=>k!=="found"||list.some(c=>c.status==="found")).map(([k,l])=>{
+    const cs=list.filter(c=>c.status===k).sort((a,b)=>(nextStep(a)?.due??Infinity)-(nextStep(b)?.due??Infinity));
+    return `<div class="col" data-col="${k}"><h3><span>${l}</span><span class="num">${cs.length}</span></h3>
+      ${cs.map(c=>{const n=nextStep(c); const late=n&&!n.passive&&n.due<Date.now()-day;
+        return `<button class="card" draggable="true" data-id="${esc(c.id)}"><b>${esc(c.name)}</b><span>${esc(c.company||c.headline||"")}</span>
+        ${n?`<span class="${late?"late":""}">${esc(n.text)}</span>`:""}</button>`;}).join("")}</div>`;
+  }).join("") + `<div class="col blk" data-col="blacklisted"><h3><span>Blacklist</span><span class="num">${bl}</span></h3>
+     <span class="hint" style="padding:4px">Drop here to never approach again. Pending invites get withdrawn by Claude.</span></div>`;
+}
+function setView(v){ view=v; $("vTable").setAttribute("aria-pressed",v==="table"); $("vBoard").setAttribute("aria-pressed",v==="board");
+  $("tablePanel").hidden=v!=="table"; $("boardPanel").hidden=v!=="board"; $("boardHint").hidden=v!=="board";
+  try{ localStorage.setItem("od-view",v); }catch{} render(); }
+$("vTable").addEventListener("click",()=>setView("table"));
+$("vBoard").addEventListener("click",()=>setView("board"));
+let dragId=null;
+document.addEventListener("dragstart",e=>{ const c=e.target.closest?.(".card"); if(!c) return; dragId=c.dataset.id; c.classList.add("dragging"); e.dataTransfer.effectAllowed="move"; e.dataTransfer.setData("text/plain",dragId); });
+document.addEventListener("dragend",e=>{ e.target.classList?.remove("dragging"); document.querySelectorAll(".col.over").forEach(x=>x.classList.remove("over")); });
+document.addEventListener("dragover",e=>{ const col=e.target.closest?.(".col"); if(!col||!dragId) return; e.preventDefault(); document.querySelectorAll(".col.over").forEach(x=>x!==col&&x.classList.remove("over")); col.classList.add("over"); });
+document.addEventListener("drop",async e=>{ const col=e.target.closest?.(".col"); if(!col||!dragId) return; e.preventDefault(); col.classList.remove("over");
+  const c=contacts.find(x=>x.id===dragId); dragId=null; const to=col.dataset.col; if(!c||c.status===to) return;
+  if(to==="blacklisted"){ await blacklist(c); return; }
+  const patch={status:to}; const f=STAMP[to]; if(f && !c[f]) patch[f]=new Date().toISOString();
+  await write(c,patch,`Moved to ${LABEL[to]||to}`);
+});
+async function blacklist(c){
+  const pending=["requested","stale"].includes(c.status);
+  const overdue = t(c.requestedAt)+settings.staleDays*day < Date.now();
+  await write(c,{status:"blacklisted", prevStatus:c.status, blacklistedAt:new Date().toISOString(),
+    blacklistReason: pending&&overdue ? "No answer in "+settings.staleDays+" days" : "Your choice", withdrawPending: pending},
+    pending?"Blacklisted, invite withdrawal queued":"Blacklisted");
+}
+
+function acceptRate(list){
+  const sent=list.filter(c=>c.requestedAt).length;
+  const acc=list.filter(c=>c.requestedAt && c.acceptedAt).length;
+  return sent? `${Math.round(acc/sent*100)}% (${acc}/${sent})` : "–";
+}
+
+function renderDrawer(){
+  const c = contacts.find(x=>x.id===openId); const d=$("drawer");
+  if(!c){ closeDrawer(); return; }
+  const n=nextStep(c);
+  const drafts = c.drafts||{};
+  const ro = canWrite? "" : "disabled";
+  d.innerHTML = `
+    <div class="dhead"><div><div class="eyebrow">${esc(c.country||"")} · ${esc(GROUPS[c.group]||"")}</div>
+      <h2 style="font-size:20px">${esc(c.name)}</h2>
+      ${c.linkedinUrl?`<a href="${esc(c.linkedinUrl)}" target="_blank" rel="noopener">Open LinkedIn profile</a>`:""}</div>
+      <button class="x" id="close" aria-label="Close">✕</button></div>
+    <div><span class="pill s-${esc(c.status)}">${esc(LABEL[c.status]||c.status)}</span>
+      ${n?`<span class="sub"> &nbsp;Next: ${esc(n.text)}${isNaN(n.due)?"":" ("+rel(n.due)+")"}</span>`:""}</div>
+    <dl class="facts">
+      <dt>Title</dt><dd>${esc(c.headline||c.role||"–")}</dd>
+      <dt>Company</dt><dd>${esc(c.company||"–")}</dd>
+      <dt>Location</dt><dd>${esc(c.location||c.country||"–")}</dd>
+      <dt>Source</dt><dd>${esc(c.source||"–")}</dd>
+      <dt>Requested</dt><dd>${c.requestedAt?fmt(c.requestedAt):"–"}</dd>
+      <dt>Accepted</dt><dd>${c.acceptedAt?fmt(c.acceptedAt):"–"}</dd>
+    </dl>
+    ${c.commonPoint?`<div class="common"><div class="eyebrow">Common point</div>${esc(c.commonPoint)}</div>`:""}
+    ${DRAFTS.map(([k,l])=>{const dr=drafts[k]; if(!dr) return ""; const st=dr.sentAt?"sent":dr.approved?"ok":"wait";
+      return `<div class="draft"><header><h3 style="font-size:14px">${l}</h3>
+        <span class="tag ${st}">${dr.sentAt?"Sent "+fmt(dr.sentAt):dr.approved?"Approved, Claude sends it on the next run":"Draft, needs your OK"}</span></header>
+        <textarea id="dt-${k}" ${dr.sentAt||!canWrite?"readonly":""} aria-label="${l}">${esc(dr.text)}</textarea>
+        <div class="btns">
+          <button class="btn" data-copy="${k}">Copy</button>
+          ${!dr.sentAt?`<button class="btn" data-save="${k}" ${ro}>Save edit</button>
+          <button class="btn ${dr.approved?"":"primary"}" data-approve="${k}" ${ro}>${dr.approved?"Unapprove":"Approve"}</button>
+          <button class="btn" data-sent="${k}" ${ro}>I sent it myself</button>`:""}
+        </div></div>`;}).join("")}
+    <div class="draft"><header><h3 style="font-size:14px">Status and notes</h3></header>
+      <div class="btns">
+        <select id="statusSel" class="btn" ${ro} aria-label="Status">${STATUSES.map(([k,l])=>`<option value="${k}" ${k===c.status?"selected":""}>${l}</option>`).join("")}</select>
+        <button class="btn" id="setStatus" ${ro}>Set status</button>
+        ${c.status!=="replied"&&c.status!=="done"&&c.status!=="blacklisted"?`<button class="btn" id="markReplied" ${ro}>They replied</button>`:""}
+      </div>
+      <div class="btns">${c.status==="blacklisted"
+        ? `<span class="sub">Blacklisted ${c.blacklistedAt?fmt(c.blacklistedAt):""}${c.withdrawPending?" · Claude withdraws the invite on the next run":""}</span> <button class="btn" data-restore="${esc(c.id)}" ${ro}>Restore</button>`
+        : `<button class="btn" id="blacklist" data-armed="0" ${ro} style="color:var(--crit)">${["requested","stale"].includes(c.status)?"Withdraw and blacklist":"Blacklist"}</button>`}</div>
+      <textarea id="notes" placeholder="Your notes about this person" ${canWrite?"":"readonly"} style="min-height:70px">${esc(c.notes||"")}</textarea>
+      <div class="btns"><button class="btn" id="saveNotes" ${ro}>Save notes</button></div>
+    </div>
+    ${(c.history||[]).length?`<div><div class="eyebrow" style="margin-bottom:6px">History</div><div class="hist">
+      ${[...c.history].reverse().map(h=>`<div><b>${esc(h.event)}</b> · ${fmt(h.at)}${h.by?" · "+esc(h.by):""}</div>`).join("")}</div></div>`:""}
+  `;
+}
+
+function openDrawer(id){ openId=id; $("drawer").hidden=false; $("scrim").hidden=false; renderDrawer(); $("close")?.focus(); }
+function closeDrawer(){ openId=null; $("drawer").hidden=true; $("scrim").hidden=true; }
+function toast(msg){ const el=$("toast"); el.textContent=msg; el.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>el.hidden=true,2200); }
+
+let writing=false;
+async function write(c, patch, event){
+  if(writing) return; writing=true;
+  try{
+    const r = await fetch("/api/contacts/"+encodeURIComponent(c.id), {method:"POST",
+      headers:{"Content-Type":"application/json","X-Outreach-Desk":"1"}, body: JSON.stringify({patch, event, by:"You"})});
+    if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error || r.status);
+    toast(event||"Saved"); await poll(true);
+  }catch(e){ toast("Could not save: is the Outreach Desk server running?"); }
+  finally{ writing=false; }
+}
+const SENT_STATUS = {thanks:["thanked","thankedAt"], cv:["cv_sent","cvSentAt"], followup:["followed_up","followUpAt"]};
+
+document.addEventListener("click", async e=>{
+  const b=e.target.closest("button, tr.row"); if(!b) return;
+  if(b.id==="vTable"||b.id==="vBoard") return;
+  if(b.dataset.country){ country=b.dataset.country; status="all"; render(); return; }
+  if(b.dataset.status){ status=b.dataset.status; render(); return; }
+  if(b.dataset.restore){ const r=contacts.find(x=>x.id===b.dataset.restore); if(!r) return;
+    const back = r.withdrawnAt ? "found" : (r.prevStatus||"requested");
+    await write(r,{status:back, withdrawPending:false, blacklistReason:""},"Restored from blacklist"); return; }
+  if(b.dataset.id){ openDrawer(b.dataset.id); return; }
+  if(b.id==="close"){ closeDrawer(); return; }
+  const c=contacts.find(x=>x.id===openId); if(!c) return;
+  if(b.id==="blacklist"){
+    if(b.dataset.armed!=="1"){ b.dataset.armed="1"; b.textContent="Click again to confirm"; setTimeout(()=>{ if(b.isConnected){ b.dataset.armed="0"; b.textContent=["requested","stale"].includes(c.status)?"Withdraw and blacklist":"Blacklist"; }},4000); return; }
+    await blacklist(c); return; }
+  const k=b.dataset.copy||b.dataset.save||b.dataset.approve||b.dataset.sent;
+  if(b.dataset.copy){ const txt=$("dt-"+k).value; try{ await navigator.clipboard.writeText(txt); toast("Copied"); }catch{ $("dt-"+k).select(); toast("Selected, press Cmd+C"); } return; }
+  if(b.dataset.save){ await write(c, {drafts:{[k]:{text:$("dt-"+k).value, editedByUser:true}}}, null); return; }
+  if(b.dataset.approve){ const dr=c.drafts[k]; await write(c, {drafts:{[k]:{text:$("dt-"+k).value, approved:!dr.approved}}}, dr.approved?`Unapproved ${k} draft`:`Approved ${k} draft`); return; }
+  if(b.dataset.sent){ const now=new Date().toISOString(); const [st,field]=SENT_STATUS[k];
+    await write(c, {status:st, [field]:now, drafts:{[k]:{text:$("dt-"+k).value, sentAt:now}}}, `Sent ${k} message (by you)`); return; }
+  if(b.id==="setStatus"){ const v=$("statusSel").value; if(v!==c.status) await write(c,{status:v},`Status set to ${LABEL[v]}`); return; }
+  if(b.id==="markReplied"){ await write(c,{status:"replied",repliedAt:new Date().toISOString()},"They replied"); return; }
+  if(b.id==="saveNotes"){ await write(c,{notes:$("notes").value},null); return; }
+});
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape"){ if(openId) closeDrawer(); if(!$("runModal").hidden){ $("runModal").hidden=true; $("scrim").hidden=true; } }
+  if(e.key==="Enter" && e.target.matches("tr.row")) openDrawer(e.target.dataset.id);
+});
+$("scrim").addEventListener("click", ()=>{ closeDrawer(); $("runModal").hidden=true; $("addModal").hidden=true; });
+$("search").addEventListener("input", e=>{ query=e.target.value; render(); });
+
+try{ const v=localStorage.getItem("od-view"); if(v==="board") view="board"; }catch{}
+render();
+if(view==="board") setView("board");
+
+const DLABEL={thanks:"thank-you",cv:"CV message",followup:"follow-up"};
+let runReq={};
+function queueItems(){
+  const out=[];
+  contacts.forEach(c=>{ Object.entries(c.drafts||{}).forEach(([k,d])=>{ if(d&&d.approved&&!d.sentAt) out.push(`Send ${DLABEL[k]||k} to ${c.name}`); });
+    if(c.withdrawPending) out.push(`Withdraw invite to ${c.name}`); });
+  return out;
+}
+const RUN_PROMPT="Run the Outreach Desk queue";
+function renderRun(){
+  const q=queueItems(), b=$("runBtn"), st=runReq.status;
+  b.className="runbtn";
+  if(st==="running"){ b.classList.add("running"); $("runLabel").textContent="Claude is running…"; }
+  else if(st==="requested"){ b.classList.add("waiting"); $("runLabel").textContent=`Waiting for Claude · ${q.length}`; }
+  else if(q.length){ b.classList.add("ready"); $("runLabel").textContent=`Run ${q.length} change${q.length>1?"s":""}`; }
+  else { $("runLabel").textContent = st==="done"&&runReq.doneAt ? `All done · ${new Date(runReq.doneAt).toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})}` : "Nothing to run"; }
+  if(!$("runModal").hidden) renderRunModal();
+}
+function renderRunModal(){
+  const q=queueItems(), st=runReq.status, m=$("runModal");
+  const head = st==="running" ? "Claude is working on it" : st==="done"&&!q.length ? "Everything is done" : `${q.length} change${q.length===1?"":"s"} sent to Claude`;
+  m.innerHTML = `<div class="dhead"><h2 id="runTitle" style="font-size:18px">${esc(head)}</h2><button class="x" id="runClose" aria-label="Close">✕</button></div>
+    ${q.length?`<ol>${q.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
+    ${st==="running"?`<p class="sub" style="margin:0">Keep the Claude browser window open. This page updates by itself as each step finishes.</p>`:""}
+    ${st==="done"&&runReq.note?`<p class="sub" style="margin:0">Last run: ${esc(runReq.note)}</p>`:""}
+    ${st==="requested"?`
+    <div class="step"><b>If Claude is watching the desk</b><span class="sub">It starts on its own within a few seconds and this button changes to “Claude is running”.</span></div>
+    <div class="step"><b>If nothing happens</b><span class="sub">Open Claude Code in the project where this skill is installed and send this:</span>
+      <div class="cmd"><span id="runCmd">${RUN_PROMPT}</span><button class="btn" id="copyRun">Copy</button></div></div>
+    <div class="step"><b>Make it automatic</b><span class="sub">Once per Claude session, send <span class="num">Watch the Outreach Desk</span>. From then on this button starts Claude directly.</span></div>
+    <p class="sub" style="margin:0">LinkedIn must be logged in in Claude's browser window.</p>`:""}`;
+}
+async function requestRun(){
+  try{
+    const r=await fetch("/api/run",{method:"POST",headers:{"Content-Type":"application/json","X-Outreach-Desk":"1"},body:"{}"});
+    if(!r.ok) throw 0; await poll(true);
+  }catch{ toast("Could not reach the Outreach Desk server"); }
+}
+$("runBtn").addEventListener("click", async ()=>{
+  const q=queueItems(), st=runReq.status;
+  if(q.length && st!=="requested" && st!=="running") await requestRun();
+  else if(!q.length && st!=="requested" && st!=="running" && st!=="done"){ toast("Nothing to run. Approve a draft or blacklist an invite first."); return; }
+  $("runModal").hidden=false; $("scrim").hidden=false; renderRunModal();
+});
+document.addEventListener("click", async e=>{
+  if(e.target.id==="runClose"){ $("runModal").hidden=true; if(!openId) $("scrim").hidden=true; }
+  if(e.target.id==="copyRun"){ try{ await navigator.clipboard.writeText(RUN_PROMPT); toast("Copied. Paste it in Claude Code"); }catch{ const r=document.createRange(); r.selectNodeContents($("runCmd")); getSelection().removeAllRanges(); getSelection().addRange(r); toast("Selected, press Cmd+C"); } }
+});
+
+function slugFor(url,name){
+  const m=(url||"").match(/linkedin\.com\/in\/([^/?#]+)/i);
+  let s = m ? decodeURIComponent(m[1]) : (name+"-"+Date.now().toString(36));
+  return s.normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Za-z0-9_-]+/g,"-").replace(/^-+|-+$/g,"").toLowerCase().slice(0,120);
+}
+function closeAdd(){ $("addModal").hidden=true; if(!openId) $("scrim").hidden=true; }
+$("addBtn").addEventListener("click",()=>{ $("addModal").reset(); $("addMsg").textContent=""; $("addModal").hidden=false; $("scrim").hidden=false; $("fName").focus(); });
+$("addClose").addEventListener("click",closeAdd);
+$("addModal").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const name=$("fName").value.trim(); if(!name) return;
+  let url=$("fUrl").value.trim(); const m=url.match(/linkedin\.com\/in\/([^/?#]+)/i); if(m) url="https://www.linkedin.com/in/"+m[1]+"/";
+  const status=$("fStatus").value, now=new Date().toISOString();
+  const contact={name, linkedinUrl:url, headline:$("fHead").value.trim(), company:$("fCo").value.trim(), country:$("fCountry").value.trim()||"Unknown",
+    group:$("fGroup").value, status, source:"Added by hand"};
+  if(status!=="found") contact.requestedAt=now; if(status==="accepted") contact.acceptedAt=now;
+  try{
+    const r=await fetch("/api/contacts",{method:"POST",headers:{"Content-Type":"application/json","X-Outreach-Desk":"1"},body:JSON.stringify({id:slugFor(url,name),contact})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){ $("addMsg").textContent=d.error||"Could not add"; return; }
+    closeAdd(); toast("Added "+name); await poll(true);
+  }catch{ $("addMsg").textContent="Server not answering"; }
+});
+
+let rev=-1, failed=0;
+async function poll(force){
+  try{
+    const r = await fetch("/api/state"+(force||rev<0?"":"?rev="+rev), {cache:"no-store"});
+    if(r.status===200){ const d=await r.json(); rev=d.rev; contacts=d.contacts; settings={...DEFAULTS,...(d.meta?.settings||{})}; meta=d.meta?.run||{}; runReq=d.meta?.runRequest||{}; loaded=true; render(); renderRun(); }
+    failed=0; $("banner").hidden=true;
+  }catch(e){ if(++failed>=2){ $("banner").hidden=false; $("banner").textContent="The Outreach Desk server isn't answering. Ask Claude to open the Outreach Desk, or run: python3 app/launch.py"; } }
+}
+canWrite=true; poll(true); setInterval(()=>{ if(!document.hidden) poll(false); }, 4000);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) poll(false); });
+</script>
+</body>
+</html>

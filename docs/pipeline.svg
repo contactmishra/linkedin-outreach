@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="430" viewBox="0 0 1280 430" role="img" aria-labelledby="t d">
+  <title id="t">The outreach pipeline</title>
+  <desc id="d">Find people, connect, they accept, thank-you, CV and ask for help, one follow-up. Replies go to you. Stale invites get withdrawn and blacklisted.</desc>
+  <style>
+    .f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+    .m{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8AA39A"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="430" rx="24" fill="#F3F5F4"/>
+  <text x="48" y="58" class="f" font-size="13" font-weight="700" letter-spacing="2" fill="#5B6B65">ONE CONTACT'S JOURNEY</text>
+  <text x="48" y="90" class="f" font-size="26" font-weight="800" fill="#15211D">From stranger to referral, in six steps</text>
+
+  <!-- connectors -->
+  <g stroke="#8AA39A" stroke-width="2" fill="none" marker-end="url(#a)">
+    <line x1="228" y1="190" x2="250" y2="190"/>
+    <line x1="428" y1="190" x2="450" y2="190"/>
+    <line x1="628" y1="190" x2="650" y2="190"/>
+    <line x1="828" y1="190" x2="850" y2="190"/>
+    <line x1="1028" y1="190" x2="1050" y2="190"/>
+  </g>
+
+  <g class="f">
+    <!-- 1 -->
+    <rect x="48" y="122" width="180" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="76" cy="150" r="14" fill="#1F6B57"/><text x="76" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">1</text>
+    <text x="64" y="194" font-size="18" font-weight="800" fill="#15211D">Find</text>
+    <text x="64" y="218" font-size="13" fill="#5B6B65">Apollo or LinkedIn</text>
+    <text x="64" y="236" font-size="13" fill="#5B6B65">search, 3 to 5 per</text>
+    <text x="64" y="254" font-size="13" fill="#5B6B65">company</text>
+    <!-- 2 -->
+    <rect x="250" y="122" width="178" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="278" cy="150" r="14" fill="#1F6B57"/><text x="278" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">2</text>
+    <text x="266" y="194" font-size="18" font-weight="800" fill="#15211D">Connect</text>
+    <text x="266" y="218" font-size="13" fill="#5B6B65">Request with no note,</text>
+    <text x="266" y="236" font-size="13" fill="#5B6B65">15 a day, 80 a week</text>
+    <text x="266" y="254" font-size="13" fill="#5B6B65">at most</text>
+    <!-- 3 -->
+    <rect x="450" y="122" width="178" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="478" cy="150" r="14" fill="#1F6B57"/><text x="478" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">3</text>
+    <text x="466" y="194" font-size="18" font-weight="800" fill="#15211D">Accepted</text>
+    <text x="466" y="218" font-size="13" fill="#5B6B65">Claude spots new</text>
+    <text x="466" y="236" font-size="13" fill="#5B6B65">connections on</text>
+    <text x="466" y="254" font-size="13" fill="#5B6B65">each run</text>
+    <!-- 4 -->
+    <rect x="650" y="122" width="178" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="678" cy="150" r="14" fill="#1F6B57"/><text x="678" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">4</text>
+    <text x="666" y="194" font-size="18" font-weight="800" fill="#15211D">Thank-you</text>
+    <text x="666" y="218" font-size="13" fill="#5B6B65">One real thing you</text>
+    <text x="666" y="236" font-size="13" fill="#5B6B65">have in common,</text>
+    <text x="666" y="254" font-size="13" fill="#5B6B65">no ask yet</text>
+    <!-- 5 -->
+    <rect x="850" y="122" width="178" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="878" cy="150" r="14" fill="#1F6B57"/><text x="878" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">5</text>
+    <text x="866" y="194" font-size="18" font-weight="800" fill="#15211D">CV + ask</text>
+    <text x="866" y="218" font-size="13" fill="#5B6B65">3 days later: CV and</text>
+    <text x="866" y="236" font-size="13" fill="#5B6B65">a clear request for</text>
+    <text x="866" y="254" font-size="13" fill="#5B6B65">a referral</text>
+    <!-- 6 -->
+    <rect x="1050" y="122" width="182" height="150" rx="14" fill="#FFFFFF" stroke="#D5DCD9"/>
+    <circle cx="1078" cy="150" r="14" fill="#1F6B57"/><text x="1078" y="155" font-size="13" font-weight="800" fill="#FFF" text-anchor="middle">6</text>
+    <text x="1066" y="194" font-size="18" font-weight="800" fill="#15211D">Follow-up</text>
+    <text x="1066" y="218" font-size="13" fill="#5B6B65">Once, 7 days later,</text>
+    <text x="1066" y="236" font-size="13" fill="#5B6B65">only if no reply.</text>
+    <text x="1066" y="254" font-size="13" fill="#5B6B65">Then stop.</text>
+
+    <!-- who acts -->
+    <g font-size="12" font-weight="700">
+      <rect x="64" y="284" width="124" height="24" rx="12" fill="#DCEDE6"/><text x="126" y="300" fill="#1F6B57" text-anchor="middle">You approve list</text>
+      <rect x="266" y="284" width="124" height="24" rx="12" fill="#DCEDE6"/><text x="328" y="300" fill="#1F6B57" text-anchor="middle">Claude clicks</text>
+      <rect x="466" y="284" width="124" height="24" rx="12" fill="#DCEDE6"/><text x="528" y="300" fill="#1F6B57" text-anchor="middle">Claude checks</text>
+      <rect x="666" y="284" width="146" height="24" rx="12" fill="#F8EAD3"/><text x="739" y="300" fill="#A9650B" text-anchor="middle">Claude drafts, you OK</text>
+      <rect x="866" y="284" width="146" height="24" rx="12" fill="#F8EAD3"/><text x="939" y="300" fill="#A9650B" text-anchor="middle">Claude drafts, you OK</text>
+      <rect x="1066" y="284" width="146" height="24" rx="12" fill="#F8EAD3"/><text x="1139" y="300" fill="#A9650B" text-anchor="middle">Claude drafts, you OK</text>
+    </g>
+
+    <!-- side paths -->
+    <rect x="48" y="336" width="580" height="60" rx="12" fill="#F7DEDA"/>
+    <text x="68" y="362" font-size="15" font-weight="800" fill="#B3372B">No answer in 21 days?</text>
+    <text x="68" y="383" font-size="13" fill="#7A3A33">Withdraw the invite and blacklist: never contacted again, in any campaign.</text>
+    <rect x="652" y="336" width="580" height="60" rx="12" fill="#DDF1E5"/>
+    <text x="672" y="362" font-size="15" font-weight="800" fill="#1E7A4C">They reply, at any step?</text>
+    <text x="672" y="383" font-size="13" fill="#2F5E46">The sequence stops and you take over. Claude can draft your answer.</text>
+  </g>
+</svg>
