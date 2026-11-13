@@ -92,7 +92,7 @@ Never edit `db.json` or `data/backups/` by hand.
 6. Requests go out through the daily run, within the limits. **No note** on requests (free accounts get only a few notes a month).
 
 ### C. The user changes things on the dashboard
-They can add people by hand (+ Add person, `source: "Added by hand"`), edit and approve drafts, mark a message as sent by themselves, set statuses (also by dragging on the Board), mark replies, blacklist and write notes. Always `S get` a contact right before acting on it, and write with `S update` (merge), never `S set` on an existing contact.
+They can add people by hand (Add person, `source: "Added by hand"`), review drafts as cards and approve them one by one or with **Approve all** (approved = green, edited = `editedByUser`, blue), edit and approve drafts, mark a message as sent by themselves, set statuses (also by dragging on the Board), mark replies, blacklist and write notes. Always `S get` a contact right before acting on it, and write with `S update` (merge), never `S set` on an existing contact.
 
 ### D. Run the dashboard queue ("Run the Outreach Desk queue", "run my changes")
 The user pressed **Run changes**. That press IS their approval for every item in the queue: don't ask again, do it and report.

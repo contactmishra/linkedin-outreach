@@ -35,7 +35,7 @@ The fastest way into a company is someone who already works there. Getting there
 | **You approve every word** | Nothing reaches LinkedIn until you approve it. Claude drafts and does the clicking; you decide who to contact, what gets sent and how to answer replies. |
 | **Runs on your computer** | No cloud service holds your LinkedIn session. You log in yourself in a visible browser window, and your contacts live in one file on your machine. |
 | **Built-in brakes** | 15 requests a day, 80 a week, human-paced clicks, invites with no answer withdrawn after 21 days, and a blacklist so nobody is contacted twice. |
-| **A real dashboard** | A funnel, what's due today, every contact with their drafts, a drag-and-drop board and the blacklist, on `localhost`. |
+| **A real dashboard** | Review every draft as a card, **Approve all** in one click, colour that shows what you've done, a drag-and-drop board and a blacklist, on `localhost`. |
 | **Free and hackable** | MIT licensed, plain Python with no packages to install, a single HTML page. Make it yours. |
 
 ---
@@ -104,30 +104,28 @@ No Claude session watching? The button tells you the one line to paste into Clau
 
 ## The dashboard
 
-<p align="center"><img src="docs/dashboard.png" alt="Outreach Desk dashboard with demo data: pipeline funnel, weekly invite meter, due-now list and the contact table" width="100%"></p>
+<p align="center"><img src="docs/dashboard.png" alt="Outreach Desk with demo data: Review drafts view with approved cards in green, an Approve all button and the multi-colour pipeline bar" width="100%"></p>
+
+The **Outreach Desk** is built like a Mac app: a sidebar with your to-do lists, the list in the middle, and the person you open on the right. It fills the whole window, so there's very little scrolling.
+
+- **Review drafts.** Every message waiting for you is a card you can read and edit in place. Approve one, or press **Approve all**, which you can undo. A counter shows how many are done: *3 of 7 drafts approved*.
+- **Colour tells you what you've done.** Approved turns **green**, edited turns **blue**, sent fades to **grey**, a queued withdrawal turns **red**. Cards stay where they are, so you never lose your place.
+- **One colour per stage.** The pipeline bar on top splits everyone by stage (requested, accepted, thanked, CV sent, replied, stale…), and the same colours run through the sidebar, rows, board and each person's journey.
+- **Limits you can see.** Invites in the last 24 hours and 7 days turn orange near the limit and red above it.
+- **Keyboard first.** `↑` `↓` move through the list, `A` approves (or undoes), `/` searches, `Esc` closes.
 
 <table>
 <tr>
-<td width="50%"><img src="docs/board.png" alt="Board view: drag cards between stages or onto the blacklist"><br><b>Board.</b> Drag a card to another stage, or onto <b>Blacklist</b>.</td>
-<td width="50%"><img src="docs/contact.png" alt="Contact card with the common point, the thank-you draft and Approve button"><br><b>Contact card.</b> The common point, each draft (edit, Copy, Approve, "I sent it myself"), status, notes and history.</td>
+<td width="50%"><img src="docs/contact.png" alt="List of everyone with state colours and the person panel open"><br><b>Everyone.</b> Rows tinted by state, next step and due date, inline Approve. Open someone to see their journey, messages, notes and history.</td>
+<td width="50%"><img src="docs/board.png" alt="Board view with one column per stage"><br><b>Board.</b> One column per stage in its own colour. Drag a card to move someone, or drop it on <b>Blacklist</b>.</td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/run.png" alt="Run changes panel listing the queued work"><br><b>Run changes.</b> One button sends everything you approved.</td>
-<td width="50%">
-<b>Also on the dashboard</b>
-<ul>
-<li>Funnel with conversion rates per stage</li>
-<li>Invites in the last 7 days against the limit</li>
-<li><b>Due now</b>, overdue items in red</li>
-<li>Country filters and search</li>
-<li><b>+ Add person</b> for contacts you find yourself</li>
-<li>Blacklist with Restore</li>
-<li>Light and dark mode</li>
-</ul>
-<i>Screenshots use invented demo data.</i>
-</td>
+<td width="50%"><img src="docs/run.png" alt="Run changes panel listing the queued work"><br><b>Run changes.</b> Everything you approved, in one list. One press sends it.</td>
+<td width="50%"><img src="docs/dark.png" alt="Review drafts in dark mode"><br><b>Dark mode.</b> Follows your system setting.</td>
 </tr>
 </table>
+
+<p align="center"><i>All screenshots use invented demo data.</i></p>
 
 ---
 
@@ -195,7 +193,7 @@ Every time the skill runs, the dashboard opens first (or stays open, if it alrea
 
 **A typical day (about 10 minutes):**
 1. Start Claude Code and say **Watch the Outreach Desk**, then **run today's outreach**.
-2. On the dashboard, read the drafts, edit any you want, click **Approve**. Click **Withdraw and blacklist** on stale invites.
+2. On the dashboard, open **Review drafts**: read the cards, edit any you want, then **Approve** them one by one or **Approve all**. They turn green. Under **Stale invites**, click **Withdraw**.
 3. Press the glowing **Run changes** button.
 4. Answer any replies yourself, then click **They replied** on that person.
 
@@ -218,9 +216,9 @@ python3 app/launch.py          # start and open http://localhost:4877
 python3 app/launch.py --stop   # stop it
 ```
 
-- **+ Add person**: name, LinkedIn URL, company, country, group, and whether you've already sent the request.
+- **Add person**: name, LinkedIn URL, company, country, group, and whether you've already sent the request.
 - Drag cards on the **Board** as people move along (accepted, thanked, CV sent…).
-- Write drafts in a contact's card (or have Claude write them), click **Copy**, send it on LinkedIn yourself, then **I sent it myself**. The next step's timer starts automatically.
+- Write a draft in a person's panel (or have Claude write them), click the copy icon, send it on LinkedIn yourself, then **I sent it myself**. The next step's timer starts automatically.
 - Blacklist anyone you don't want to approach again.
 
 **From the command line** (also what Claude uses):
