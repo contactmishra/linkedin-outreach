@@ -45,7 +45,7 @@ The fastest way into a company is someone who already works there. Getting there
 
 ```bash
 # 1. Put the skill where Claude Code finds it (all projects)
-git clone https://github.com/contactmishra/linkedin-outreach ~/.claude/skills/linkedin-outreach
+git clone https://github.com/theommishra-dev/linkedin-outreach ~/.claude/skills/linkedin-outreach
 
 # 2. Run the setup check (it asks before changing anything)
 cd ~/.claude/skills/linkedin-outreach && python3 install.py
@@ -161,10 +161,10 @@ Works on macOS, Linux and Windows. The double-click `Outreach Desk.app` is macOS
 
 ```bash
 # for all your projects
-git clone https://github.com/contactmishra/linkedin-outreach ~/.claude/skills/linkedin-outreach
+git clone https://github.com/theommishra-dev/linkedin-outreach ~/.claude/skills/linkedin-outreach
 
 # or for one project only
-git clone https://github.com/contactmishra/linkedin-outreach <your-project>/.claude/skills/linkedin-outreach
+git clone https://github.com/theommishra-dev/linkedin-outreach <your-project>/.claude/skills/linkedin-outreach
 ```
 
 **2. Run the setup check.**
