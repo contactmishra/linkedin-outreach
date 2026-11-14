@@ -19,6 +19,20 @@ INDEX = os.path.join(HERE, "web", "index.html")
 last_hit = time.time()
 last_page = 0.0  # last time an open dashboard polled /api/state
 
+# Live view: Claude's browser posts JPEG frames of the LinkedIn tab it is working in, and the dashboard shows
+# them. Frames stay in memory only (never written to disk) and are dropped when the run ends.
+MAX_FRAME = 3 * 1024 * 1024
+live = {"on": False, "seq": 0, "frame": b"", "at": 0.0, "url": "", "title": ""}
+live_cond = threading.Condition()
+
+
+def live_info():
+    with live_cond:
+        if live["on"] and time.time() - live["at"] > 180:  # the sender went away without saying stop
+            live.update(on=False, frame=b"")
+        return {"on": live["on"], "seq": live["seq"], "age": round(time.time() - live["at"], 1) if live["at"] else None,
+                "url": live["url"], "title": live["title"]}
+
 
 class Handler(BaseHTTPRequestHandler):
     server_version = "OutreachDesk"
@@ -52,6 +66,19 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             with open(INDEX, "rb") as f:
                 return self._send(200, f.read(), "text/html; charset=utf-8")
+        if path.startswith("/api/live"):
+            # only the dashboard itself may read the live view, never another site embedding it
+            if self.headers.get("Sec-Fetch-Site", "same-origin") not in ("same-origin", "none"):
+                return self._send(403)
+            if path == "/api/live":
+                return self._json(200, live_info())
+            if path == "/api/live/frame.jpg":
+                with live_cond:
+                    frame = live["frame"]
+                return self._send(200, frame, "image/jpeg") if frame else self._send(204)
+            if path == "/api/live/stream":
+                return self._stream()
+            return self._send(404)
         if path == "/api/ping":
             return self._json(200, {"ok": True, "pageOpen": time.time() - last_page < 15})
         if path == "/api/state":
@@ -64,12 +91,56 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, {"rev": db.get("rev"), "contacts": contacts, "meta": db.get("meta", {})})
         return self._send(404)
 
+    def _stream(self):
+        """The live view as one long multipart response: each new frame replaces the last in an <img>."""
+        global last_hit
+        self.send_response(200)
+        self.send_header("Content-Type", "multipart/x-mixed-replace; boundary=deskframe")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.end_headers()
+        seen = -1
+        try:
+            while True:
+                with live_cond:
+                    if live["seq"] == seen:
+                        live_cond.wait(10)
+                    if not live["on"] and live["seq"] == seen:
+                        return
+                    seen, frame = live["seq"], live["frame"]
+                if not frame:
+                    return
+                last_hit = time.time()
+                self.wfile.write(b"--deskframe\r\nContent-Type: image/jpeg\r\nContent-Length: " + str(len(frame)).encode() + b"\r\n\r\n" + frame + b"\r\n")
+                self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError, OSError):
+            return
+
     def do_POST(self):
         global last_hit
         last_hit = time.time()
         # custom header = browsers must preflight cross-site requests, which we never allow
         if not self._host_ok() or self.headers.get("X-Outreach-Desk") != "1":
             return self._send(403)
+        if self.path == "/api/live/frame":
+            n = int(self.headers.get("Content-Length", "0"))
+            if not 0 < n <= MAX_FRAME:
+                return self._send(413)
+            body = self.rfile.read(n)
+            if body[:2] != b"\xff\xd8":
+                return self._json(400, {"error": "JPEG frames only"})
+            from urllib.parse import unquote
+            with live_cond:
+                live.update(on=True, frame=body, at=time.time(), seq=live["seq"] + 1,
+                            url=unquote(self.headers.get("X-Live-Url", ""))[:500], title=unquote(self.headers.get("X-Live-Title", ""))[:200])
+                live_cond.notify_all()
+            return self._send(204)
+        if self.path == "/api/live/stop":
+            with live_cond:
+                live.update(on=False, frame=b"", url="", title="")
+                live["seq"] += 1
+                live_cond.notify_all()
+            return self._json(200, {"ok": True})
         if self.path == "/api/contacts":
             try:
                 n = int(self.headers.get("Content-Length", "0"))

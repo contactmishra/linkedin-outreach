@@ -33,3 +33,17 @@ File `<skill>/data/db.json`: `{rev, contacts: {<id>: {...}}, meta: {settings, ru
 ## Writing
 - New contacts: one `<id>.json` per contact in a scratchpad folder, then `store.py import <dir>`.
 - Changes: `store.py update <id> '<patch>' --event "..."` (merge; `{"__delete__": true}` removes a key; history entry added automatically with `by: Claude`).
+
+## Run request and live checklist (`meta.runRequest`)
+
+Written by the dashboard's **Run changes** button and by `store.py start-run`, `step`, `finish-run`.
+
+| Field | Meaning |
+|---|---|
+| `status` | `requested` (button pressed), `running` (Claude started), `done` |
+| `at`, `startedAt`, `doneAt` | timestamps of the last change, the start and the end |
+| `items` | the queue at the moment of the press: `{id, name, action, label}` per item, action = `send_thanks`, `send_cv`, `send_followup` or `withdraw` |
+| `items[n].state`, `items[n].note` | set by `store.py step <n> doing|done|failed [--note]`; drives the Live run checklist |
+| `note` | one-line result from `finish-run --note` |
+
+The live picture itself is not stored: see `references/live-view.md`.

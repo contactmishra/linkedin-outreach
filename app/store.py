@@ -193,6 +193,21 @@ def set_run(status, **extra):
         return rr
 
 
+def run_step(n, state, note=""):
+    """Mark item n (1-based) of the current run as doing, done or failed, so the dashboard can show progress."""
+    with _locked():
+        db = _read()
+        rr = db.setdefault("meta", {}).setdefault("runRequest", {})
+        items = rr.get("items") or []
+        if not 1 <= n <= len(items):
+            raise IndexError(f"run has {len(items)} items")
+        items[n - 1]["state"] = state
+        if note:
+            items[n - 1]["note"] = note
+        _write(db)
+        return items[n - 1]
+
+
 def _summary(db):
     from collections import Counter
     cs = db["contacts"]
@@ -218,6 +233,7 @@ def main(argv=None):
     sub.add_parser("queue")
     sp = sub.add_parser("wait-request"); sp.add_argument("--timeout", type=int, default=0, help="seconds, 0 = forever")
     sub.add_parser("start-run")
+    sp = sub.add_parser("step"); sp.add_argument("n", type=int); sp.add_argument("state", choices=["doing", "done", "failed"]); sp.add_argument("--note", default="")
     sp = sub.add_parser("finish-run"); sp.add_argument("--note", default="")
     a = p.parse_args(argv)
     out = None
@@ -267,6 +283,11 @@ def main(argv=None):
             time.sleep(3)
     elif a.cmd == "start-run":
         out = set_run("running", startedAt=now_iso())
+    elif a.cmd == "step":
+        try:
+            out = run_step(a.n, a.state, a.note)
+        except IndexError as e:
+            sys.exit(str(e))
     elif a.cmd == "finish-run":
         out = set_run("done", doneAt=now_iso(), note=a.note)
     print(json.dumps(out, ensure_ascii=False, indent=1))

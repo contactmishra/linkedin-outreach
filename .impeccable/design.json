@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-14T15:59:38Z",
+  "title": "Design System: Outreach Desk",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Page",
+        "canonical": "oklch(0.985 0.003 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.004 275)",
+          "oklch(0.264 0.008 275)",
+          "oklch(0.379 0.011 275)",
+          "oklch(0.493 0.012 275)",
+          "oklch(0.607 0.012 275)",
+          "oklch(0.721 0.010 275)",
+          "oklch(0.836 0.007 275)",
+          "oklch(0.950 0.002 275)"
+        ],
+        "dark": "oklch(0.17 0.012 275)"
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Rail",
+        "canonical": "oklch(0.966 0.006 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.004 275)",
+          "oklch(0.264 0.008 275)",
+          "oklch(0.379 0.011 275)",
+          "oklch(0.493 0.012 275)",
+          "oklch(0.607 0.012 275)",
+          "oklch(0.721 0.010 275)",
+          "oklch(0.836 0.007 275)",
+          "oklch(0.950 0.002 275)"
+        ],
+        "dark": "oklch(0.148 0.012 275)"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.150 0.005 275)",
+          "oklch(0.264 0.010 275)",
+          "oklch(0.379 0.013 275)",
+          "oklch(0.493 0.014 275)",
+          "oklch(0.607 0.014 275)",
+          "oklch(0.721 0.011 275)",
+          "oklch(0.836 0.008 275)",
+          "oklch(0.950 0.003 275)"
+        ],
+        "dark": "oklch(0.205 0.014 275)"
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Surface Hover",
+        "canonical": "oklch(0.972 0.005 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.006 275)",
+          "oklch(0.264 0.011 275)",
+          "oklch(0.379 0.014 275)",
+          "oklch(0.493 0.016 275)",
+          "oklch(0.607 0.015 275)",
+          "oklch(0.721 0.013 275)",
+          "oklch(0.836 0.009 275)",
+          "oklch(0.950 0.003 275)"
+        ],
+        "dark": "oklch(0.24 0.016 275)"
+      },
+      "sunk": {
+        "role": "neutral",
+        "displayName": "Sunk",
+        "canonical": "oklch(0.975 0.004 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.004 275)",
+          "oklch(0.264 0.008 275)",
+          "oklch(0.379 0.011 275)",
+          "oklch(0.493 0.012 275)",
+          "oklch(0.607 0.012 275)",
+          "oklch(0.721 0.010 275)",
+          "oklch(0.836 0.007 275)",
+          "oklch(0.950 0.002 275)"
+        ],
+        "dark": "oklch(0.15 0.012 275)"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "canonical": "oklch(0.23 0.022 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.008 275)",
+          "oklch(0.264 0.015 275)",
+          "oklch(0.379 0.020 275)",
+          "oklch(0.493 0.022 275)",
+          "oklch(0.607 0.021 275)",
+          "oklch(0.721 0.018 275)",
+          "oklch(0.836 0.012 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.955 0.005 275)"
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Text 2",
+        "canonical": "oklch(0.44 0.02 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 275)",
+          "oklch(0.264 0.014 275)",
+          "oklch(0.379 0.018 275)",
+          "oklch(0.493 0.020 275)",
+          "oklch(0.607 0.019 275)",
+          "oklch(0.721 0.016 275)",
+          "oklch(0.836 0.011 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.76 0.012 275)"
+      },
+      "text-3": {
+        "role": "neutral",
+        "displayName": "Text 3",
+        "canonical": "oklch(0.54 0.018 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 275)",
+          "oklch(0.264 0.012 275)",
+          "oklch(0.379 0.016 275)",
+          "oklch(0.493 0.018 275)",
+          "oklch(0.607 0.017 275)",
+          "oklch(0.721 0.015 275)",
+          "oklch(0.836 0.010 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.635 0.014 275)"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "oklch(0.23 0.022 275 / .09)",
+        "tonalRamp": [
+          "oklch(0.150 0.008 275)",
+          "oklch(0.264 0.015 275)",
+          "oklch(0.379 0.020 275)",
+          "oklch(0.493 0.022 275)",
+          "oklch(0.607 0.021 275)",
+          "oklch(0.721 0.018 275)",
+          "oklch(0.836 0.012 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(1 0 0 / .075)"
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Line 2",
+        "canonical": "oklch(0.23 0.022 275 / .16)",
+        "tonalRamp": [
+          "oklch(0.150 0.008 275)",
+          "oklch(0.264 0.015 275)",
+          "oklch(0.379 0.020 275)",
+          "oklch(0.493 0.022 275)",
+          "oklch(0.607 0.021 275)",
+          "oklch(0.721 0.018 275)",
+          "oklch(0.836 0.012 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(1 0 0 / .14)"
+      },
+      "fill": {
+        "role": "neutral",
+        "displayName": "Fill",
+        "canonical": "oklch(0.23 0.022 275 / .045)",
+        "tonalRamp": [
+          "oklch(0.150 0.008 275)",
+          "oklch(0.264 0.015 275)",
+          "oklch(0.379 0.020 275)",
+          "oklch(0.493 0.022 275)",
+          "oklch(0.607 0.021 275)",
+          "oklch(0.721 0.018 275)",
+          "oklch(0.836 0.012 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(1 0 0 / .045)"
+      },
+      "fill-2": {
+        "role": "neutral",
+        "displayName": "Fill 2",
+        "canonical": "oklch(0.23 0.022 275 / .085)",
+        "tonalRamp": [
+          "oklch(0.150 0.008 275)",
+          "oklch(0.264 0.015 275)",
+          "oklch(0.379 0.020 275)",
+          "oklch(0.493 0.022 275)",
+          "oklch(0.607 0.021 275)",
+          "oklch(0.721 0.018 275)",
+          "oklch(0.836 0.012 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(1 0 0 / .09)"
+      },
+      "brand": {
+        "role": "primary",
+        "displayName": "Electric Violet",
+        "canonical": "oklch(0.53 0.235 285)",
+        "tonalRamp": [
+          "oklch(0.150 0.085 285)",
+          "oklch(0.264 0.160 285)",
+          "oklch(0.379 0.211 285)",
+          "oklch(0.493 0.234 285)",
+          "oklch(0.607 0.227 285)",
+          "oklch(0.721 0.191 285)",
+          "oklch(0.836 0.130 285)",
+          "oklch(0.950 0.046 285)"
+        ],
+        "dark": "oklch(0.56 0.225 285)"
+      },
+      "brand-2": {
+        "role": "primary",
+        "displayName": "Electric Violet, hover",
+        "canonical": "oklch(0.47 0.235 285)",
+        "tonalRamp": [
+          "oklch(0.150 0.085 285)",
+          "oklch(0.264 0.160 285)",
+          "oklch(0.379 0.211 285)",
+          "oklch(0.493 0.234 285)",
+          "oklch(0.607 0.227 285)",
+          "oklch(0.721 0.191 285)",
+          "oklch(0.836 0.130 285)",
+          "oklch(0.950 0.046 285)"
+        ],
+        "dark": "oklch(0.5 0.225 285)"
+      },
+      "brand-soft": {
+        "role": "primary",
+        "displayName": "Violet Wash",
+        "canonical": "oklch(0.53 0.235 285 / .1)",
+        "tonalRamp": [
+          "oklch(0.150 0.085 285)",
+          "oklch(0.264 0.160 285)",
+          "oklch(0.379 0.211 285)",
+          "oklch(0.493 0.234 285)",
+          "oklch(0.607 0.227 285)",
+          "oklch(0.721 0.191 285)",
+          "oklch(0.836 0.130 285)",
+          "oklch(0.950 0.046 285)"
+        ],
+        "dark": "oklch(0.62 0.21 285 / .16)"
+      },
+      "brand-text": {
+        "role": "primary",
+        "displayName": "Violet Ink",
+        "canonical": "oklch(0.48 0.225 285)",
+        "tonalRamp": [
+          "oklch(0.150 0.082 285)",
+          "oklch(0.264 0.153 285)",
+          "oklch(0.379 0.202 285)",
+          "oklch(0.493 0.224 285)",
+          "oklch(0.607 0.218 285)",
+          "oklch(0.721 0.183 285)",
+          "oklch(0.836 0.124 285)",
+          "oklch(0.950 0.044 285)"
+        ],
+        "dark": "oklch(0.79 0.125 285)"
+      },
+      "on-brand": {
+        "role": "primary",
+        "displayName": "On Violet",
+        "canonical": "oklch(0.99 0.005 285)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 285)",
+          "oklch(0.264 0.014 285)",
+          "oklch(0.379 0.018 285)",
+          "oklch(0.493 0.020 285)",
+          "oklch(0.607 0.019 285)",
+          "oklch(0.721 0.016 285)",
+          "oklch(0.836 0.011 285)",
+          "oklch(0.950 0.004 285)"
+        ],
+        "dark": "oklch(0.99 0.005 285)"
+      },
+      "aura": {
+        "role": "primary",
+        "displayName": "Aura",
+        "canonical": "oklch(0.53 0.235 285 / .06)",
+        "tonalRamp": [
+          "oklch(0.150 0.085 285)",
+          "oklch(0.264 0.160 285)",
+          "oklch(0.379 0.211 285)",
+          "oklch(0.493 0.234 285)",
+          "oklch(0.607 0.227 285)",
+          "oklch(0.721 0.191 285)",
+          "oklch(0.836 0.130 285)",
+          "oklch(0.950 0.046 285)"
+        ],
+        "dark": "oklch(0.56 0.225 285 / .13)"
+      },
+      "i-found": {
+        "role": "tertiary",
+        "displayName": "Graphite (To request)",
+        "canonical": "oklch(0.55 0.018 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 275)",
+          "oklch(0.264 0.012 275)",
+          "oklch(0.379 0.016 275)",
+          "oklch(0.493 0.018 275)",
+          "oklch(0.607 0.017 275)",
+          "oklch(0.721 0.015 275)",
+          "oklch(0.836 0.010 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.68 0.016 275)"
+      },
+      "i-requested": {
+        "role": "tertiary",
+        "displayName": "Signal Blue (Requested)",
+        "canonical": "oklch(0.52 0.17 255)",
+        "tonalRamp": [
+          "oklch(0.150 0.062 255)",
+          "oklch(0.264 0.115 255)",
+          "oklch(0.379 0.152 255)",
+          "oklch(0.493 0.169 255)",
+          "oklch(0.607 0.164 255)",
+          "oklch(0.721 0.138 255)",
+          "oklch(0.836 0.094 255)",
+          "oklch(0.950 0.034 255)"
+        ],
+        "dark": "oklch(0.74 0.13 255)"
+      },
+      "i-accepted": {
+        "role": "tertiary",
+        "displayName": "Cyan Teal (Accepted)",
+        "canonical": "oklch(0.52 0.11 210)",
+        "tonalRamp": [
+          "oklch(0.150 0.040 210)",
+          "oklch(0.264 0.075 210)",
+          "oklch(0.379 0.099 210)",
+          "oklch(0.493 0.109 210)",
+          "oklch(0.607 0.106 210)",
+          "oklch(0.721 0.090 210)",
+          "oklch(0.836 0.061 210)",
+          "oklch(0.950 0.022 210)"
+        ],
+        "dark": "oklch(0.78 0.11 210)"
+      },
+      "i-thanked": {
+        "role": "tertiary",
+        "displayName": "Mint (Thanked)",
+        "canonical": "oklch(0.52 0.12 165)",
+        "tonalRamp": [
+          "oklch(0.150 0.047 165)",
+          "oklch(0.264 0.088 165)",
+          "oklch(0.379 0.116 165)",
+          "oklch(0.493 0.129 165)",
+          "oklch(0.607 0.126 165)",
+          "oklch(0.721 0.106 165)",
+          "oklch(0.836 0.072 165)",
+          "oklch(0.950 0.026 165)"
+        ],
+        "dark": "oklch(0.79 0.13 165)"
+      },
+      "i-cv_sent": {
+        "role": "tertiary",
+        "displayName": "Magenta (CV sent)",
+        "canonical": "oklch(0.52 0.21 320)",
+        "tonalRamp": [
+          "oklch(0.150 0.076 320)",
+          "oklch(0.264 0.143 320)",
+          "oklch(0.379 0.188 320)",
+          "oklch(0.493 0.209 320)",
+          "oklch(0.607 0.203 320)",
+          "oklch(0.721 0.171 320)",
+          "oklch(0.836 0.116 320)",
+          "oklch(0.950 0.041 320)"
+        ],
+        "dark": "oklch(0.76 0.16 320)"
+      },
+      "i-followed_up": {
+        "role": "tertiary",
+        "displayName": "Amber (Followed up, warn)",
+        "canonical": "oklch(0.55 0.13 70)",
+        "tonalRamp": [
+          "oklch(0.150 0.047 70)",
+          "oklch(0.264 0.088 70)",
+          "oklch(0.379 0.116 70)",
+          "oklch(0.493 0.129 70)",
+          "oklch(0.607 0.126 70)",
+          "oklch(0.721 0.106 70)",
+          "oklch(0.836 0.072 70)",
+          "oklch(0.950 0.026 70)"
+        ],
+        "dark": "oklch(0.81 0.13 75)"
+      },
+      "i-replied": {
+        "role": "secondary",
+        "displayName": "Approval Green (Replied, ok)",
+        "canonical": "oklch(0.52 0.15 150)",
+        "tonalRamp": [
+          "oklch(0.150 0.058 150)",
+          "oklch(0.264 0.109 150)",
+          "oklch(0.379 0.143 150)",
+          "oklch(0.493 0.159 150)",
+          "oklch(0.607 0.155 150)",
+          "oklch(0.721 0.130 150)",
+          "oklch(0.836 0.088 150)",
+          "oklch(0.950 0.032 150)"
+        ],
+        "dark": "oklch(0.8 0.16 150)"
+      },
+      "i-done": {
+        "role": "tertiary",
+        "displayName": "Sage Grey-Green (Done)",
+        "canonical": "oklch(0.5 0.03 150)",
+        "tonalRamp": [
+          "oklch(0.150 0.015 150)",
+          "oklch(0.264 0.027 150)",
+          "oklch(0.379 0.036 150)",
+          "oklch(0.493 0.040 150)",
+          "oklch(0.607 0.039 150)",
+          "oklch(0.721 0.033 150)",
+          "oklch(0.836 0.022 150)",
+          "oklch(0.950 0.008 150)"
+        ],
+        "dark": "oklch(0.7 0.04 150)"
+      },
+      "i-stale": {
+        "role": "tertiary",
+        "displayName": "Alarm Red (Stale, bad)",
+        "canonical": "oklch(0.55 0.21 25)",
+        "tonalRamp": [
+          "oklch(0.150 0.076 25)",
+          "oklch(0.264 0.143 25)",
+          "oklch(0.379 0.188 25)",
+          "oklch(0.493 0.209 25)",
+          "oklch(0.607 0.203 25)",
+          "oklch(0.721 0.171 25)",
+          "oklch(0.836 0.116 25)",
+          "oklch(0.950 0.041 25)"
+        ],
+        "dark": "oklch(0.72 0.18 25)"
+      },
+      "i-blacklisted": {
+        "role": "tertiary",
+        "displayName": "Slate (Blacklisted)",
+        "canonical": "oklch(0.4 0.015 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.005 275)",
+          "oklch(0.264 0.010 275)",
+          "oklch(0.379 0.013 275)",
+          "oklch(0.493 0.015 275)",
+          "oklch(0.607 0.015 275)",
+          "oklch(0.721 0.012 275)",
+          "oklch(0.836 0.008 275)",
+          "oklch(0.950 0.003 275)"
+        ],
+        "dark": "oklch(0.62 0.012 275)"
+      },
+      "toast": {
+        "role": "neutral",
+        "displayName": "Toast",
+        "canonical": "oklch(0.26 0.02 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 275)",
+          "oklch(0.264 0.014 275)",
+          "oklch(0.379 0.018 275)",
+          "oklch(0.493 0.020 275)",
+          "oklch(0.607 0.019 275)",
+          "oklch(0.721 0.016 275)",
+          "oklch(0.836 0.011 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.26 0.02 275)"
+      },
+      "on-toast": {
+        "role": "neutral",
+        "displayName": "On Toast",
+        "canonical": "oklch(0.96 0.005 275)",
+        "tonalRamp": [
+          "oklch(0.150 0.004 275)",
+          "oklch(0.264 0.007 275)",
+          "oklch(0.379 0.009 275)",
+          "oklch(0.493 0.010 275)",
+          "oklch(0.607 0.010 275)",
+          "oklch(0.721 0.008 275)",
+          "oklch(0.836 0.006 275)",
+          "oklch(0.950 0.002 275)"
+        ],
+        "dark": "oklch(0.96 0.005 275)"
+      },
+      "scrim": {
+        "role": "neutral",
+        "displayName": "Scrim",
+        "canonical": "oklch(0.15 0.02 275 / .5)",
+        "tonalRamp": [
+          "oklch(0.150 0.007 275)",
+          "oklch(0.264 0.014 275)",
+          "oklch(0.379 0.018 275)",
+          "oklch(0.493 0.020 275)",
+          "oklch(0.607 0.019 275)",
+          "oklch(0.721 0.016 275)",
+          "oklch(0.836 0.011 275)",
+          "oklch(0.950 0.004 275)"
+        ],
+        "dark": "oklch(0.15 0.02 275 / .5)"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The view title in the header. One per screen."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "The person's name in the inspector; dialog titles one step under at 18px."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "The product name in the rail and the live panel heading."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Pipeline counts and the two rates, tabular."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "The page default; names at weight 550."
+      },
+      "body-sm": {
+        "displayName": "Body small",
+        "purpose": "Rail navigation, search, draft and note text, live checklist items."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Buttons, segmented switch, table cells, secondary lines."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table headers, inspector section headings, field labels, meta lines."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Rail section headings and counts, limit meters, pipeline stage names."
+      },
+      "seal": {
+        "displayName": "Seal (Desk Stamp)",
+        "purpose": "Stamps and seals only. Inlined subset of Barlow Condensed SemiBold, caps and digits, SIL OFL 1.1."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "The one copyable command in the live panel."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-shadow",
+        "value": "0 1px 2px oklch(0.23 0.022 275 / .05)",
+        "dark": "inset 0 1px 0 oklch(1 0 0 / .04)",
+        "purpose": "Rest: cards, default buttons, the search field, the segmented switch."
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 4px oklch(0.23 0.022 275 / .05), 0 10px 24px oklch(0.23 0.022 275 / .08)",
+        "dark": "inset 0 1px 0 oklch(1 0 0 / .06), 0 10px 28px oklch(0 0 0 / .35)",
+        "purpose": "A card on hover; the live browser frame at rest."
+      },
+      {
+        "name": "shadow",
+        "value": "0 2px 6px oklch(0.23 0.022 275 / .08), 0 18px 48px oklch(0.23 0.022 275 / .18)",
+        "dark": "0 2px 6px oklch(0 0 0 / .4), 0 22px 60px oklch(0 0 0 / .55)",
+        "purpose": "Float: sheet, dialog, toast, floating and mini live panel."
+      },
+      {
+        "name": "glow",
+        "value": "0 0 0 1px oklch(0.53 0.235 285 / .35), 0 12px 40px oklch(0.53 0.235 285 / .2)",
+        "dark": "0 0 0 1px oklch(0.62 0.21 285 / .5), 0 14px 50px oklch(0.56 0.225 285 / .32)",
+        "purpose": "The live browser frame while a run is in progress, and nothing else."
+      },
+      {
+        "name": "button-primary",
+        "value": "inset 0 1px 0 oklch(1 0 0 / .18), 0 1px 2px oklch(0.3 0.2 285 / .35)",
+        "purpose": "Top highlight and tight violet contact shadow on primary buttons."
+      },
+      {
+        "name": "run-ready",
+        "value": "inset 0 1px 0 oklch(1 0 0 / .2), 0 6px 20px oklch(0.53 0.235 285 / .38)",
+        "purpose": "The Run button when there is something to run."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px var(--brand-soft)",
+        "purpose": "Text fields on focus, with a violet border."
+      },
+      {
+        "name": "selected-ring",
+        "value": "0 0 0 1px var(--brand)",
+        "purpose": "Selected review or board card, outside its violet border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Default easing for hover, press, selection, panels and the seal."
+      },
+      {
+        "name": "duration-press",
+        "value": "120ms",
+        "purpose": "Scale to 0.97 (icon buttons 0.92) on press."
+      },
+      {
+        "name": "duration-hover",
+        "value": "140ms to 160ms",
+        "purpose": "Background, colour and border changes."
+      },
+      {
+        "name": "duration-state",
+        "value": "200ms to 260ms",
+        "purpose": "Layout and selection moves, view transition groups, search widening, toast and dialog entry."
+      },
+      {
+        "name": "view-transition-root",
+        "value": "180ms ease-out",
+        "purpose": "Cross-fade of everything not individually named."
+      },
+      {
+        "name": "panel-slide",
+        "value": "slideIn 300ms ease, slideOut 200ms ease-in, translateX(36px) with opacity",
+        "purpose": "Inspector, sheet and live panel entering and leaving."
+      },
+      {
+        "name": "seal-press",
+        "value": "340ms ease, from rotate(-9deg) scale(1.7) opacity 0 blur(2px)",
+        "purpose": "A fresh approval; the card flashes a 4px green ring over 700ms."
+      },
+      {
+        "name": "tick-draw",
+        "value": "400ms ease, stroke-dashoffset 14 to 0",
+        "purpose": "A checklist item completing in the live panel."
+      },
+      {
+        "name": "run-loops",
+        "value": "blink 1.1s alternate; ping 1.6s scale(2.8) fade; spin 0.8s linear",
+        "purpose": "The only loops: run-in-progress indicators."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all keyframes and view transitions inside prefers-reduced-motion: no-preference",
+        "purpose": "Motion is off entirely under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "live-floats",
+        "value": "1280px",
+        "purpose": "The live panel leaves the grid and floats."
+      },
+      {
+        "name": "inspector-sheet",
+        "value": "1180px",
+        "purpose": "Docked inspector is replaced by the sheet; Run moves to the first header row."
+      },
+      {
+        "name": "phone",
+        "value": "760px",
+        "purpose": "Rail becomes a top bar; page scrolls as a document."
+      },
+      {
+        "name": "container-main-compact",
+        "value": "960px (container main)",
+        "purpose": "Pipeline cells stack; rates hide."
+      },
+      {
+        "name": "container-main-rings",
+        "value": "700px (container main)",
+        "purpose": "Pipeline shows ring and count only."
+      },
+      {
+        "name": "container-main-wrap",
+        "value": "460px (container main)",
+        "purpose": "Bulk bar wraps."
+      },
+      {
+        "name": "container-list-4col",
+        "value": "920px (list container)",
+        "purpose": "Table drops Company and Due."
+      },
+      {
+        "name": "container-list-2col",
+        "value": "600px (list container)",
+        "purpose": "Table becomes a two-column list."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one violet action in a region: Approve, Approve all, the dialog submit. Shown at default and small size.",
+      "html": "<div class=\"ds-row\"><button class=\"ds-btn ds-btn-primary\"><svg class=\"ds-i\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8.5l3.2 3.2L13 4.8\"/></svg>Approve all 5</button><button class=\"ds-btn ds-btn-primary ds-btn-small\">Approve</button></div>",
+      "css": ".ds-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } .ds-i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--line-2); background: var(--surface); border-radius: 8px; padding: 5px 12px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13px; font-weight: 500; color: var(--text); box-shadow: var(--card-shadow); cursor: pointer; white-space: nowrap; transition: background-color .16s cubic-bezier(.16,1,.3,1), border-color .16s cubic-bezier(.16,1,.3,1), transform .12s cubic-bezier(.16,1,.3,1), box-shadow .16s cubic-bezier(.16,1,.3,1); } .ds-btn:hover { background: var(--surface-2); } .ds-btn:active { transform: scale(.97); } .ds-btn:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; } .ds-btn-primary { background: var(--brand); border-color: transparent; color: var(--on-brand); font-weight: 600; box-shadow: inset 0 1px 0 oklch(1 0 0 / .18), 0 1px 2px oklch(0.3 0.2 285 / .35); } .ds-btn-primary:hover { background: var(--brand-2); } .ds-btn-small { padding: 3px 9px; font-size: 12.5px; border-radius: 7px; }"
+    },
+    {
+      "name": "Default, Ghost and Danger Buttons",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Default for neutral actions, ghost for low-stakes ones, danger with a two-click arm (second swatch shows the armed state).",
+      "html": "<div class=\"ds-row\"><button class=\"ds-btn\">Unapprove all</button><button class=\"ds-btn ds-btn-ghost\">I sent it myself</button><button class=\"ds-btn ds-btn-danger\">Withdraw</button><button class=\"ds-btn ds-btn-danger ds-btn-armed\">Click again to confirm</button></div>",
+      "css": ".ds-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--line-2); background: var(--surface); border-radius: 8px; padding: 5px 12px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13px; font-weight: 500; color: var(--text); box-shadow: var(--card-shadow); cursor: pointer; white-space: nowrap; transition: background-color .16s cubic-bezier(.16,1,.3,1), border-color .16s cubic-bezier(.16,1,.3,1), transform .12s cubic-bezier(.16,1,.3,1), box-shadow .16s cubic-bezier(.16,1,.3,1); } .ds-btn:hover { background: var(--surface-2); } .ds-btn:active { transform: scale(.97); } .ds-btn:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; } .ds-btn-ghost { border-color: transparent; background: transparent; color: var(--brand-text); box-shadow: none; } .ds-btn-ghost:hover { background: var(--brand-soft); } .ds-btn-danger { color: var(--i-stale); } .ds-btn-armed, .ds-btn-armed:hover { background: var(--i-stale); border-color: var(--i-stale); color: var(--surface); transition: none; }"
+    },
+    {
+      "name": "Run Button",
+      "kind": "button",
+      "refersTo": "run-button-ready",
+      "description": "The header's primary object in its four states: nothing to run, ready, waiting for Claude, running.",
+      "html": "<div class=\"ds-row\"><button class=\"ds-run\"><i></i>Nothing to run</button><button class=\"ds-run ds-run-ready\"><i></i>Run 2 changes</button><button class=\"ds-run ds-run-waiting\"><i></i>Waiting for Claude</button><button class=\"ds-run ds-run-running\"><i></i>Claude is working…</button></div>",
+      "css": ".ds-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } .ds-run { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-2); border-radius: 8px; padding: 6px 14px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-weight: 600; font-size: 13px; background: transparent; color: var(--text-3); cursor: pointer; transition: transform .12s cubic-bezier(.16,1,.3,1), background-color .2s cubic-bezier(.16,1,.3,1), box-shadow .2s cubic-bezier(.16,1,.3,1); } .ds-run:active { transform: scale(.97); } .ds-run:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; } .ds-run i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .6; } .ds-run-ready { background: var(--brand); border-color: transparent; color: var(--on-brand); box-shadow: inset 0 1px 0 oklch(1 0 0 / .2), 0 6px 20px oklch(0.53 0.235 285 / .38); } .ds-run-ready:hover { background: var(--brand-2); } .ds-run-ready i { opacity: 1; } .ds-run-waiting { border-color: var(--i-followed_up); color: var(--i-followed_up); } .ds-run-running { border-color: var(--brand); color: var(--brand-text); background: var(--brand-soft); } @media (prefers-reduced-motion: no-preference) { .ds-run-waiting i, .ds-run-running i { animation: ds-blink 1.1s ease-in-out infinite alternate; } @keyframes ds-blink { to { opacity: .2; } } }"
+    },
+    {
+      "name": "Status Glyph and Journey Pills",
+      "kind": "chip",
+      "refersTo": "stage-pill",
+      "description": "The ring that fills as a person moves along the pipeline, as bare stage chips and as journey pills (reached, current, not reached).",
+      "html": "<div class=\"ds-col\"><div class=\"ds-row\"><span class=\"ds-chip\" style=\"--c:var(--i-found)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"2.2 2.32\"/></svg>To request</span><span class=\"ds-chip\" style=\"--c:var(--i-requested)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"2.09 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Requested</span><span class=\"ds-chip\" style=\"--c:var(--i-accepted)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"4.19 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Accepted</span><span class=\"ds-chip\" style=\"--c:var(--i-thanked)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"6.28 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Thanked</span><span class=\"ds-chip\" style=\"--c:var(--i-cv_sent)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"8.38 12.566\" transform=\"rotate(-90 7 7)\"/></svg>CV sent</span><span class=\"ds-chip\" style=\"--c:var(--i-followed_up)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"10.47 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Followed up</span><span class=\"ds-chip\" style=\"--c:var(--i-replied)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"6.5\" fill=\"currentColor\"/><path d=\"M4.3 7.2l1.9 1.9 3.6-4\" fill=\"none\" stroke=\"var(--surface)\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Replied</span><span class=\"ds-chip\" style=\"--c:var(--i-stale)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path d=\"M7 4v3.4M7 9.7v.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>Stale</span></div><div class=\"ds-row\"><span class=\"ds-chip ds-pill\" style=\"--c:var(--i-requested)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"2.09 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Requested <span>2 Nov</span></span><span class=\"ds-chip ds-pill\" style=\"--c:var(--i-accepted)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"4.19 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Accepted <span>8 Nov</span></span><span class=\"ds-chip ds-pill ds-pill-cur\" style=\"--c:var(--i-thanked)\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"6.28 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Thanked <span>10 Nov</span></span><span class=\"ds-chip ds-pill ds-pill-ghost\"><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"2.2 2.32\"/></svg>CV sent</span></div></div>",
+      "css": ".ds-col { display: grid; gap: 12px; } .ds-row { display: flex; gap: 6px 14px; align-items: center; flex-wrap: wrap; } .ds-sg { width: 14px; height: 14px; flex: none; color: var(--c, var(--text-3)); } .ds-chip { display: inline-flex; align-items: center; gap: 6px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13px; color: var(--text); white-space: nowrap; } .ds-pill { border: 1px solid var(--line-2); border-radius: 999px; padding: 2px 9px 2px 7px; font-size: 12.5px; } .ds-pill span { color: var(--text-2); font-weight: 400; } .ds-pill-cur { border-color: transparent; background: color-mix(in oklch, var(--c) 15%, transparent); font-weight: 600; } .ds-pill-ghost { border-style: dashed; color: var(--text-3); }"
+    },
+    {
+      "name": "Stamps and the Approval Seal",
+      "kind": "custom",
+      "refersTo": "seal-approved",
+      "description": "What you decided about a draft. Single-rule stamps for draft states; the double-ruled seal for approval and a queued withdrawal.",
+      "html": "<div class=\"ds-row\"><span class=\"ds-stamp\" style=\"--c:var(--i-followed_up)\">Needs OK</span><span class=\"ds-stamp\" style=\"--c:var(--brand-text)\">Edited</span><span class=\"ds-stamp ds-seal\" style=\"--c:var(--i-replied)\">Approved</span><span class=\"ds-stamp ds-seal ds-seal-flat\" style=\"--c:var(--i-stale)\">Withdraw queued</span><span class=\"ds-stamp\" style=\"--c:var(--i-found)\">Sent</span></div>",
+      "css": ".ds-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; } .ds-stamp { display: inline-flex; align-items: baseline; gap: 5px; border: 1.5px solid currentColor; border-radius: 4px; padding: 1px 6px 0; color: var(--c, var(--text-2)); font: 600 12px/1.5 'Desk Stamp','Avenir Next Condensed','Arial Narrow',-apple-system,system-ui,sans-serif; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; } .ds-seal { outline: 1px solid currentColor; outline-offset: 2px; margin: 3px; transform: rotate(-3deg); } .ds-seal-flat { transform: none; } "
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Rail items with icon, label and count; the current item gets a tonal pill and a violet icon, and a count that needs action becomes a violet badge.",
+      "html": "<nav class=\"ds-nav\"><h3>To do</h3><button class=\"ds-nav-item\" aria-current=\"true\"><svg class=\"ds-i\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"/><path d=\"M5.2 8.3l1.9 1.9 3.8-4.1\"/></svg><span>Review drafts</span><b class=\"ds-hot\">5</b></button><button class=\"ds-nav-item\"><svg class=\"ds-i\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"/><path d=\"M8 4.6V8l2.4 1.5\"/></svg><span>Due</span><b>11</b></button><button class=\"ds-nav-item\"><svg class=\"ds-i\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"/><path d=\"M3.4 12.6l9.2-9.2\"/></svg><span>Blacklist</span><b>1</b></button></nav>",
+      "css": ".ds-i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; } .ds-nav { display: grid; gap: 1px; width: 220px; background: var(--rail); padding: 10px; border-radius: 12px; } .ds-nav h3 { margin: 0 0 4px; padding: 0 8px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 12px; font-weight: 500; color: var(--text-3); } .ds-nav-item { display: flex; align-items: center; gap: 9px; width: 100%; border: 0; background: transparent; border-radius: 8px; padding: 6px 8px; text-align: left; color: var(--text-2); font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13.5px; cursor: pointer; transition: background-color .16s cubic-bezier(.16,1,.3,1), color .16s cubic-bezier(.16,1,.3,1); } .ds-nav-item span { flex: 1; } .ds-nav-item b { font-size: 12px; font-weight: 400; color: var(--text-3); min-width: 16px; text-align: right; font-variant-numeric: tabular-nums; } .ds-nav-item .ds-i { color: var(--text-3); } .ds-nav-item:hover { background: var(--fill); color: var(--text); } .ds-nav-item:active { background: var(--fill-2); } .ds-nav-item:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; } .ds-nav-item[aria-current=\"true\"] { color: var(--text); font-weight: 550; background: var(--fill-2); box-shadow: inset 0 0 0 1px var(--line); } .ds-nav-item[aria-current=\"true\"] .ds-i { color: var(--brand-text); } .ds-nav-item b.ds-hot { background: var(--brand); color: var(--on-brand); border-radius: 999px; padding: 0 7px; font-weight: 600; text-align: center; }"
+    },
+    {
+      "name": "Pipeline Strip",
+      "kind": "custom",
+      "refersTo": "pipeline-cell",
+      "description": "Stage cells between two hairlines: ring and name, count, and a bar in the stage colour. The selected cell carries a 2px underline in its colour.",
+      "html": "<div class=\"ds-pipe\"><button class=\"ds-pc\" aria-pressed=\"false\" style=\"--c:var(--i-found)\"><span><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"2.2 2.32\"/></svg>To request</span><b>1</b><i><u style=\"width:12%\"></u></i></button><button class=\"ds-pc\" aria-pressed=\"true\" style=\"--c:var(--i-requested)\"><span><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"2.09 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Requested</span><b>8</b><i><u style=\"width:100%\"></u></i></button><button class=\"ds-pc\" aria-pressed=\"false\" style=\"--c:var(--i-accepted)\"><span><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"4.19 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Accepted</span><b>6</b><i><u style=\"width:75%\"></u></i></button><button class=\"ds-pc\" aria-pressed=\"false\" style=\"--c:var(--i-thanked)\"><span><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"6.28 12.566\" transform=\"rotate(-90 7 7)\"/></svg>Thanked</span><b>2</b><i><u style=\"width:25%\"></u></i></button><button class=\"ds-pc ds-zero\" aria-pressed=\"false\" style=\"--c:var(--i-cv_sent)\"><span><svg class=\"ds-sg\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-dasharray=\"8.38 12.566\" transform=\"rotate(-90 7 7)\"/></svg>CV sent</span><b>0</b><i><u style=\"width:0%\"></u></i></button></div>",
+      "css": ".ds-sg { width: 14px; height: 14px; flex: none; color: var(--c, var(--text-3)); } .ds-pipe { display: flex; border-block: 1px solid var(--line); } .ds-pc { flex: 1 1 0; min-width: 96px; display: grid; gap: 3px; align-content: start; text-align: left; border: 0; border-right: 1px solid var(--line); background: transparent; padding: 11px 10px 10px; position: relative; cursor: pointer; color: var(--text); font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-variant-numeric: tabular-nums; transition: background-color .16s cubic-bezier(.16,1,.3,1); } .ds-pc:first-child { border-left: 1px solid var(--line); } .ds-pc:hover, .ds-pc[aria-pressed=\"true\"] { background: var(--fill); } .ds-pc:focus-visible { outline: 2px solid var(--brand-text); outline-offset: -2px; } .ds-pc[aria-pressed=\"true\"]::before { content: \"\"; position: absolute; inset: auto 0 -1px; height: 2px; background: var(--c); } .ds-pc span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); white-space: nowrap; } .ds-pc b { font-size: 22px; font-weight: 600; line-height: 1.15; letter-spacing: -.025em; } .ds-pc i { display: block; height: 3px; margin-top: 3px; background: var(--fill-2); border-radius: 1.5px; } .ds-pc u { display: block; height: 100%; min-width: 3px; background: var(--c); border-radius: 1.5px; } .ds-zero b { color: var(--text-3); font-weight: 500; } .ds-zero u { display: none; }"
+    },
+    {
+      "name": "Review Card",
+      "kind": "card",
+      "refersTo": "review-card",
+      "description": "One person and one draft: who, what you have in common, the editable message, and the approval. Shown approved, with the green border and seal.",
+      "html": "<article class=\"ds-rcard ds-approved\"><div class=\"ds-who\"><b>Elena Rossi</b><span>Security Engineer at Lumen Charge</span></div><p class=\"ds-common\"><b>In common:</b> Both secure EV charging networks.</p><div class=\"ds-drh\"><span class=\"ds-lab\">Thank-you</span><em>158 chars</em><span class=\"ds-stamp ds-seal\" style=\"--c:var(--i-replied)\">Approved</span><button class=\"ds-btn-s\">Undo</button></div><div class=\"ds-msg\">Hi Elena, thank you for accepting my request! Both secure EV charging networks, which is exactly my day-to-day. Great to be connected!</div></article>",
+      "css": ".ds-stamp { display: inline-flex; align-items: baseline; gap: 5px; border: 1.5px solid currentColor; border-radius: 4px; padding: 1px 6px 0; color: var(--c, var(--text-2)); font: 600 12px/1.5 'Desk Stamp','Avenir Next Condensed','Arial Narrow',-apple-system,system-ui,sans-serif; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; } .ds-seal { outline: 1px solid currentColor; outline-offset: 2px; margin: 3px; transform: rotate(-3deg); } .ds-seal-flat { transform: none; } .ds-rcard { max-width: 400px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 12px; padding: 14px; display: grid; gap: 10px; box-shadow: var(--card-shadow); font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; color: var(--text); transition: border-color .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1), transform .25s cubic-bezier(.16,1,.3,1); } .ds-rcard:hover { box-shadow: var(--lift); transform: translateY(-1px); } .ds-approved { border-color: var(--i-replied); } .ds-who b { display: block; font-weight: 550; font-size: 14px; } .ds-who span { display: block; font-size: 12.5px; color: var(--text-2); } .ds-common { margin: 0; font-size: 13px; color: var(--text-2); line-height: 1.45; } .ds-common b { font-weight: 550; color: var(--text); } .ds-drh { display: flex; align-items: center; gap: 6px; min-height: 28px; font-size: 12.5px; color: var(--text-3); } .ds-lab { font-weight: 550; color: var(--text-2); } .ds-drh em { font-style: normal; flex: 1; } .ds-btn-s { border: 1px solid var(--line-2); background: var(--surface); border-radius: 7px; padding: 3px 9px; font: inherit; font-size: 12.5px; font-weight: 500; color: var(--text); box-shadow: var(--card-shadow); cursor: pointer; } .ds-btn-s:hover { background: var(--surface-2); } .ds-btn-s:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; } .ds-msg { border: 1px solid var(--line-2); border-radius: 8px; background: var(--sunk); padding: 9px 11px; line-height: 1.5; font-size: 13.5px; }"
+    },
+    {
+      "name": "Search Field and Text Well",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "The header search (widens on focus) and the sunk well used for drafts, notes and dialog fields. Focus is a violet border and a 3px halo.",
+      "html": "<div class=\"ds-col\"><label class=\"ds-search\"><svg class=\"ds-i\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"7\" cy=\"7\" r=\"4.5\"/><path d=\"M10.5 10.5L14 14\"/></svg><input type=\"search\" placeholder=\"Search people\" aria-label=\"Search people\"><kbd>/</kbd></label><textarea class=\"ds-well\" rows=\"2\" aria-label=\"Notes\" placeholder=\"Notes about this person\"></textarea></div>",
+      "css": ".ds-i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; } .ds-col { display: grid; gap: 12px; justify-items: start; } .ds-search { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px; padding: 5px 8px 5px 9px; width: 220px; color: var(--text-3); box-shadow: var(--card-shadow); transition: border-color .16s cubic-bezier(.16,1,.3,1), box-shadow .16s cubic-bezier(.16,1,.3,1), width .26s cubic-bezier(.16,1,.3,1); } .ds-search:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); width: 270px; } .ds-search input { border: 0; background: transparent; outline: 0; width: 100%; min-width: 0; color: var(--text); font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13.5px; } .ds-search input::placeholder { color: var(--text-3); } .ds-search kbd { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 11px; font-weight: 500; background: var(--fill); border: 1px solid var(--line-2); border-radius: 4px; padding: 1px 5px; color: var(--text-2); } .ds-search:focus-within kbd { visibility: hidden; } .ds-well { width: 320px; resize: vertical; border: 1px solid var(--line-2); border-radius: 8px; background: var(--sunk); padding: 9px 11px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 13.5px; line-height: 1.5; color: var(--text); transition: border-color .16s cubic-bezier(.16,1,.3,1), box-shadow .16s cubic-bezier(.16,1,.3,1); } .ds-well::placeholder { color: var(--text-3); } .ds-well:focus { outline: 0; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }"
+    },
+    {
+      "name": "Live Run Panel",
+      "kind": "custom",
+      "refersTo": "live-panel",
+      "description": "The signature surface: state dot and status, a browser-framed live picture that glows violet while Claude works, and a checklist that ticks off per change.",
+      "html": "<aside class=\"ds-live\"><header><span class=\"ds-dot\"></span><div><b>Claude is working</b><span>1 of 2 done</span></div></header><div class=\"ds-browser\"><div class=\"ds-bbar\"><i></i><i></i><i></i><span>Claude's browser</span></div><div class=\"ds-bview\"></div></div><ol class=\"ds-steps\"><li class=\"ds-done\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3.5 8.4l3 3 6-6.8\"/></svg><div>Send thank-you to Anna Keller</div></li><li class=\"ds-doing\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke-dasharray=\"3 3.28\"/></svg><div>Send thank-you to Elena Rossi<p>Hi Elena, thank you for accepting my request! Great to be connected!</p></div></li><li><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6\"/></svg><div>Send CV message to Lukas Brandt</div></li></ol></aside>",
+      "css": ".ds-live { width: 380px; background: var(--rail); border-left: 1px solid var(--line); padding: 14px 20px 20px; display: grid; gap: 14px; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif; color: var(--text); } .ds-live header { display: flex; align-items: center; gap: 10px; } .ds-live header div { display: grid; } .ds-live header b { font-size: 15px; font-weight: 650; line-height: 1.3; letter-spacing: -.015em; } .ds-live header span { font-size: 12.5px; color: var(--text-2); } .ds-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand-text); flex: none; position: relative; } .ds-browser { border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--surface); box-shadow: var(--glow); } .ds-bbar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--line); } .ds-bbar i { width: 9px; height: 9px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line-2); } .ds-bbar span { flex: 1; margin-left: 8px; background: var(--fill); border-radius: 6px; padding: 3px 10px; font-size: 12px; color: var(--text-2); text-align: center; } .ds-bview { aspect-ratio: 16/10; background: var(--sunk); } .ds-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; } .ds-steps li { display: grid; grid-template-columns: 18px minmax(0,1fr); gap: 10px; align-items: start; padding: 7px 8px; border-radius: 8px; font-size: 13.5px; color: var(--text-2); } .ds-steps svg { width: 16px; height: 16px; margin-top: 2px; fill: none; stroke: var(--text-3); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-steps .ds-done { color: var(--text); } .ds-steps .ds-done svg { stroke: var(--i-replied); } .ds-steps .ds-doing { background: var(--fill); color: var(--text); font-weight: 550; } .ds-steps .ds-doing svg { stroke: var(--brand-text); } .ds-steps p { margin: 7px 0 2px; font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--text-2); background: var(--sunk); border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 10px; } @media (prefers-reduced-motion: no-preference) { .ds-dot::after { content: \"\"; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ds-ping 1.6s cubic-bezier(.16,1,.3,1) infinite; } @keyframes ds-ping { to { transform: scale(2.8); opacity: 0; } } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Control Room",
+    "overview": "Outreach Desk is a console where one person approves what Claude drafted and then watches the work happen. The whole page is built from quiet, cool neutral surfaces separated by hairlines, in two themes: a crisp white light theme and a near-black dark theme with a faint indigo tint (hue 275 throughout). Against that quiet ground only three things carry colour: one electric violet for what you can act on and what is selected, a small ring per pipeline stage that fills as a person moves along, and a green double-ruled seal that appears when you approve a draft.\n\nDensity is high and calm. Text sits at 14px, controls at 13px, and every number uses tabular figures so counts do not jitter as the page polls. Nothing is decorated for its own sake: the one atmospheric touch is a very faint violet aura behind the top of the main column, and the one loud surface is the live run panel, which glows violet only while Claude is working.\n\nState changes move instead of swapping. The selected navigation pill, the pipeline underline and the List/Board thumb travel to their new place; the inspector, the sheet and the live panel slide in from the right. The system rejects the generic admin template: grey cards on a grey page, default blue, panels that pop in and out with no continuity.",
+    "keyCharacteristics": [
+      "Two themes from one token set, with an in-page three-way switch (system, light, dark).",
+      "Hairline borders and tonal fills do the structural work; shadows grow only as a surface detaches from the page.",
+      "One violet for actions, selection and focus. Stage colours live in the status ring and its bar.",
+      "Approval is a seal in a condensed caps face, the only place that face appears.",
+      "The live run panel docks beside the work and narrows it; the work area responds to its own width, not the window's.",
+      "Motion is short (120 to 340ms), ease-out, and off entirely under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Violet Rule",
+        "body": "Violet means \"act here\" or \"this is selected\". It is never used for decoration, for a stage, or for body text. If two violet fills compete in one region, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ring Carries The Stage Rule",
+        "body": "A stage colour always arrives with its ring glyph and its written label. Stage hue is never applied to a whole card, a row background or a line of text on its own.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same Names Rule",
+        "body": "A new colour is an OKLCH token on `:root` with a dark value under both dark selectors. Components read tokens; they do not hold literal colours. The toast, the scrim and the logo tile are the three fixed exceptions.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seal Face Rule",
+        "body": "Desk Stamp and uppercase tracking appear only inside a stamp. No heading, label, button or badge is set in caps or in the condensed face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Figures are tabular everywhere (set once on `body`). Counts, limits and dates must not shift width when the data refreshes.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight Ladder Rule",
+        "body": "Emphasis is weight, not size or colour: 400 copy, 500 controls and labels, 550 names and selected items, 600 figures and primary actions, 650 titles.",
+        "section": "typography"
+      },
+      {
+        "name": "The Own Width Rule",
+        "body": "A component that lives in the work area adapts with a container query, because the live panel and the inspector change its width without changing the window. Media queries are for shell changes only.",
+        "section": "layout"
+      },
+      {
+        "name": "The Run Stays First Rule",
+        "body": "At every width the Run button is in the header's first row, right aligned.",
+        "section": "layout"
+      },
+      {
+        "name": "The Hairline First Rule",
+        "body": "Separate with a 1px `line` before reaching for a shadow or a background change. A region boundary is never a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Glow Means Live Rule",
+        "body": "The violet glow is the signal that Claude is working right now. It is not a hover, focus or emphasis style.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do define every colour as an OKLCH token on `:root` and give it a dark value under both `:root[data-theme=\"dark\"]` and the `prefers-color-scheme: dark` block.",
+      "Do keep violet for actions, selection and focus, and keep exactly one primary button per region.",
+      "Do show a stage with its ring glyph and its label together, passing the colour as `--c` from the `--i-<stage>` token.",
+      "Do separate regions with a 1px `line` and outline controls and cards with `line-2`.",
+      "Do follow the radius scale by size: 8px controls, 12px cards, 16px floating panels, 4px stamps, fully round for counts, dots and switches.",
+      "Do run state changes through the view transition helper so selections and panels move to their new place.",
+      "Do use a container query for anything inside the work area, since the live panel and the inspector change its width.",
+      "Do keep every state distinguishable without colour: drafted, edited, approved, queued and sent each have their own words and their own border or stamp.",
+      "Do inline any new asset. The page makes no network request."
+    ],
+    "donts": [
+      "Don't use violet for a stage, a decoration or body text, and don't add a second accent hue for actions.",
+      "Don't set anything but a stamp in Desk Stamp or in tracked uppercase.",
+      "Don't tint a whole card, row or line of text with a stage colour; the approved green and queued red card borders are the only state inks a container takes.",
+      "Don't use the violet glow anywhere except the live browser while a run is in progress.",
+      "Don't put the Float shadow on anything that is not floating over the page, and don't divide regions with shadows.",
+      "Don't loop an animation unless it reports a run in progress.",
+      "Don't add a keyframe or view transition outside the `prefers-reduced-motion: no-preference` block.",
+      "Don't write literal colours in a component; the toast, the scrim and the logo tile are the only fixed ones.",
+      "Don't load a web font, a CDN script or a remote image."
+    ]
+  }
+}

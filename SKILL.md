@@ -23,6 +23,7 @@ Then check `<skill>/data/profile.md`. If it doesn't exist, run **workflow F (fir
 | Dashboard (single source of truth) | http://localhost:4877, code in `<skill>/app/`, data in `<skill>/data/db.json` |
 | The user's profile: target roles, keywords, countries, common points, CV path, style, do-not-contact list | `<skill>/data/profile.md` (private, git-ignored) |
 | How to read LinkedIn pages and send things | `references/linkedin-browser.md` |
+| Showing the run live on the dashboard | `references/live-view.md` |
 | Message rules and templates | `references/messages.md` |
 | Data model | `references/data-model.md` |
 
@@ -38,6 +39,7 @@ S import <dir>                             # new contacts: one <id>.json each
 S meta run '{"lastRun":"...","lastRunNote":"..."}'
 S blacklist                                # for campaign de-dupe
 S queue                                    # what the dashboard asked Claude to do
+S step 1 doing                             # live checklist on the dashboard: doing | done | failed [--note "..."]
 ```
 
 Never edit `db.json` or `data/backups/` by hand.
@@ -92,18 +94,20 @@ Never edit `db.json` or `data/backups/` by hand.
 6. Requests go out through the daily run, within the limits. **No note** on requests (free accounts get only a few notes a month).
 
 ### C. The user changes things on the dashboard
-They can add people by hand (Add person, `source: "Added by hand"`), review drafts as cards and approve them one by one or with **Approve all** (approved = green, edited = `editedByUser`, blue), edit and approve drafts, mark a message as sent by themselves, set statuses (also by dragging on the Board), mark replies, blacklist and write notes. Always `S get` a contact right before acting on it, and write with `S update` (merge), never `S set` on an existing contact.
+They can add people by hand (Add person, `source: "Added by hand"`), review drafts as cards and approve them one by one or with **Approve all** (approved = a green "Approved" seal, edited = `editedByUser`, an "Edited" mark), edit and approve drafts, mark a message as sent by themselves, set statuses (also by dragging on the Board), mark replies, blacklist and write notes. Always `S get` a contact right before acting on it, and write with `S update` (merge), never `S set` on an existing contact.
 
 ### D. Run the dashboard queue ("Run the Outreach Desk queue", "run my changes")
 The user pressed **Run changes**. That press IS their approval for every item in the queue: don't ask again, do it and report.
-1. `S start-run` (the button shows "Claude is running").
+1. `S start-run` (the button shows "Claude is running" and the dashboard's **Live run** panel opens).
 2. LinkedIn must be open and logged in. If not, ask the user to log in; if they can't now, `S finish-run --note "Stopped: LinkedIn login needed"` and stop.
-3. `S queue`. For each item, `S get <id>` first, then:
+3. **Start the live view** so the user watches the work on the dashboard instead of switching windows: on the LinkedIn tab, `browser_run_code_unsafe` with `filename: "<skill>/app/live-start.js"` (`references/live-view.md`). Don't bring the Playwright window to the front during the run.
+4. `S queue`. For each item n (counting from 1): `S step <n> doing`, `S get <id>`, do it, then `S step <n> done` (or `S step <n> failed --note "<why>"` and go on):
    - `send_thanks` / `send_cv` / `send_followup`: send `drafts.<k>.text` exactly (`references/linkedin-browser.md`; the CV message attaches the CV file, skip and say so if it's missing). Then `S update <id> '{"status":"thanked","thankedAt":"<now>","drafts":{"thanks":{"sentAt":"<now>"}}}' --event "Thank-you sent"` (cv → `cv_sent`/`cvSentAt`, followup → `followed_up`/`followUpAt`).
    - `withdraw`: withdraw on the Sent invitations page, then `S update <id> '{"withdrawPending":false,"withdrawnAt":"<now>"}' --event "Invite withdrawn on LinkedIn"`.
    3 to 8 s between items, about 25 messages a day at most.
-4. `S finish-run --note "<one line>"` and `S meta run '{"lastRun":"<now>","lastRunNote":"..."}'`.
-5. Report in a few lines. If watching (E), start the watcher again.
+5. Stop the live view (`browser_run_code_unsafe` with `filename: "<skill>/app/live-stop.js"`), also when the run ends early.
+6. `S finish-run --note "<one line>"` and `S meta run '{"lastRun":"<now>","lastRunNote":"..."}'`.
+7. Report in a few lines. If watching (E), start the watcher again.
 
 ### E. Watch the desk ("Watch the Outreach Desk")
 Start in the background (Bash with `run_in_background: true`): `python3 "<skill>/app/store.py" wait-request`
@@ -118,4 +122,4 @@ It exits the moment the user presses **Run changes**; that wakes Claude, which d
 6. Optional: import connection requests they already sent by hand (Sent invitations → `requested`, recent Connections they requested → `accepted` with thank-you drafts). Ask first.
 
 ## Changing the dashboard itself
-Page `app/web/index.html` (served as is, reload the browser). Server `app/server.py`: 127.0.0.1 only, rejects foreign Host headers and POSTs without the `X-Outreach-Desk: 1` header, stops after 3 h idle. Restart after editing: `python3 "<skill>/app/launch.py" --stop`, then Step 0. Keep `references/data-model.md` in step with any data change.
+Page `app/web/index.html` (served as is, reload the browser). Server `app/server.py`: 127.0.0.1 only, rejects foreign Host headers and POSTs without the `X-Outreach-Desk: 1` header, stops after 3 h idle. It also relays the live view (`/api/live*`, frames in memory only). The look is recorded in `DESIGN.md`, the product facts in `PRODUCT.md`. Restart after editing: `python3 "<skill>/app/launch.py" --stop`, then Step 0. Keep `references/data-model.md` in step with any data change.

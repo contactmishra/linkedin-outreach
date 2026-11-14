@@ -1,13 +1,13 @@
 <p align="center">
-  <img src="docs/hero.svg" alt="LinkedIn Outreach for Claude Code: turn LinkedIn into referrals. Claude finds the people, writes the messages and keeps the books. You approve every word." width="100%">
+  <img src="docs/hero.png" alt="LinkedIn Outreach for Claude Code: turn LinkedIn into referrals. Claude finds the people, writes the messages and keeps the books. You approve every word." width="100%">
 </p>
 
 <p align="center">
-  <img alt="Claude Code skill" src="https://img.shields.io/badge/Claude%20Code-skill-1F6B57">
-  <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-1F6B57">
-  <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-1F6B57">
-  <img alt="Runs locally" src="https://img.shields.io/badge/runs-on%20your%20computer-1F6B57">
-  <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-1F6B57">
+  <img alt="Claude Code skill" src="https://img.shields.io/badge/Claude%20Code-skill-6D4AFF">
+  <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-6D4AFF">
+  <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-6D4AFF">
+  <img alt="Runs locally" src="https://img.shields.io/badge/runs-on%20your%20computer-6D4AFF">
+  <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-6D4AFF">
 </p>
 
 <p align="center">
@@ -35,7 +35,8 @@ The fastest way into a company is someone who already works there. Getting there
 | **You approve every word** | Nothing reaches LinkedIn until you approve it. Claude drafts and does the clicking; you decide who to contact, what gets sent and how to answer replies. |
 | **Runs on your computer** | No cloud service holds your LinkedIn session. You log in yourself in a visible browser window, and your contacts live in one file on your machine. |
 | **Built-in brakes** | 15 requests a day, 80 a week, human-paced clicks, invites with no answer withdrawn after 21 days, and a blacklist so nobody is contacted twice. |
-| **A real dashboard** | Review every draft as a card, **Approve all** in one click, colour that shows what you've done, a drag-and-drop board and a blacklist, on `localhost`. |
+| **A real dashboard** | Review every draft as a card, **Approve all** in one click, a sortable table, a drag-and-drop board and a blacklist, in light or dark, on `localhost`. |
+| **Watch it happen** | Press **Run changes** and a live panel slides in: you see Claude's browser working on LinkedIn and a checklist ticking off each message, without leaving the dashboard. |
 | **Free and hackable** | MIT licensed, plain Python with no packages to install, a single HTML page. Make it yours. |
 
 ---
@@ -98,34 +99,45 @@ sequenceDiagram
     Claude-->>You: Short report in the chat
 ```
 
-No Claude session watching? The button tells you the one line to paste into Claude instead: `Run the Outreach Desk queue`.
+While Claude works, the dashboard's **Live run** panel mirrors its browser tab and ticks off each item, so you never have to switch windows. LinkedIn does not allow itself to be embedded in another page, so what you see is a live picture of Claude's browser, relayed by the local server and kept in memory only.
+
+No Claude session watching? The panel shows the one line to paste into Claude instead: `Run the Outreach Desk queue`.
 
 ---
 
 ## The dashboard
 
-<p align="center"><img src="docs/dashboard.png" alt="Outreach Desk with demo data: Review drafts view with approved cards in green, an Approve all button and the multi-colour pipeline bar" width="100%"></p>
+<p align="center"><img src="docs/dashboard.png" alt="Outreach Desk with demo data, dark theme: Review drafts with two approved drafts carrying a green seal, an Approve all button and the pipeline strip with a status ring per stage" width="100%"></p>
 
 The **Outreach Desk** is built like a Mac app: a sidebar with your to-do lists, the list in the middle, and the person you open on the right. It fills the whole window, so there's very little scrolling.
 
 - **Review drafts.** Every message waiting for you is a card you can read and edit in place. Approve one, or press **Approve all**, which you can undo. A counter shows how many are done: *3 of 7 drafts approved*.
-- **Colour tells you what you've done.** Approved turns **green**, edited turns **blue**, sent fades to **grey**, a queued withdrawal turns **red**. Cards stay where they are, so you never lose your place.
-- **One colour per stage.** The pipeline bar on top splits everyone by stage (requested, accepted, thanked, CV sent, replied, stale…), and the same colours run through the sidebar, rows, board and each person's journey.
+- **Approval is a stamp.** Press Approve and the draft gets a green **Approved** stamp. Edited drafts are stamped **Edited**, sent ones **Sent**, a queued withdrawal is stamped in **red**. Cards stay where they are, so you never lose your place.
+- **A status ring per stage.** The pipeline strip on top counts everyone by stage (requested, accepted, thanked, CV sent, replied, stale…); click a stage to filter. Each stage has a small ring that fills as the person moves along, and the same ring marks them in the table, the board and their dated journey.
+- **Live run.** Press **Run changes** and a panel slides in with a live picture of Claude's browser, the message being sent, and a checklist of the queue. Shrink it to a small floating preview and keep working.
+- **Light and dark.** Follows your system, or pick one with the switch in the corner.
+- **A table you can sort.** Everyone, with stage, next step and due date; click a column heading to sort.
 - **Limits you can see.** Invites in the last 24 hours and 7 days turn orange near the limit and red above it.
 - **Keyboard first.** `↑` `↓` move through the list, `A` approves (or undoes), `/` searches, `Esc` closes.
 
 <table>
 <tr>
-<td width="50%"><img src="docs/contact.png" alt="List of everyone with state colours and the person panel open"><br><b>Everyone.</b> Rows tinted by state, next step and due date, inline Approve. Open someone to see their journey, messages, notes and history.</td>
-<td width="50%"><img src="docs/board.png" alt="Board view with one column per stage"><br><b>Board.</b> One column per stage in its own colour. Drag a card to move someone, or drop it on <b>Blacklist</b>.</td>
+<td width="50%"><img src="docs/contact.png" alt="Table of everyone with stage stamps and the person panel open"><br><b>Everyone.</b> A sortable table with a stage stamp, next step and due date on every row, and inline Approve. Open someone to see their journey, messages, notes and history.</td>
+<td width="50%"><img src="docs/board.png" alt="Board view with one column per stage"><br><b>Board.</b> One column per stage. Drag a card to move someone, or drop it on <b>Blacklist</b>.</td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/run.png" alt="Run changes panel listing the queued work"><br><b>Run changes.</b> Everything you approved, in one list. One press sends it.</td>
-<td width="50%"><img src="docs/dark.png" alt="Review drafts in dark mode"><br><b>Dark mode.</b> Follows your system setting.</td>
+<td width="50%"><img src="docs/live.png" alt="Live run panel showing Claude's browser, the message being sent and the checklist"><br><b>Live run.</b> Watch every message go out, on the dashboard. (The browser shown here is a stand-in demo page.)</td>
+<td width="50%"><img src="docs/light.png" alt="Review drafts in the light theme"><br><b>Light theme.</b> Follows your system setting, or switch by hand.</td>
 </tr>
 </table>
 
-<p align="center"><i>All screenshots use invented demo data.</i></p>
+<p align="center"><i>All screenshots and the video use invented demo data.</i></p>
+
+### See it in 2 minutes
+
+<p align="center"><a href="docs/tutorial.mp4"><img src="docs/live.gif" alt="Short clip of a live run: the dashboard shows Claude's browser sending messages while the checklist ticks off" width="88%"></a></p>
+
+**[Watch the full walkthrough (docs/tutorial.mp4, 1 min 40 s)](docs/tutorial.mp4):** reviewing and editing drafts, approving, the table, a person's journey, the board, themes, and a live run from start to finish.
 
 ---
 
@@ -193,8 +205,8 @@ Every time the skill runs, the dashboard opens first (or stays open, if it alrea
 
 **A typical day (about 10 minutes):**
 1. Start Claude Code and say **Watch the Outreach Desk**, then **run today's outreach**.
-2. On the dashboard, open **Review drafts**: read the cards, edit any you want, then **Approve** them one by one or **Approve all**. They turn green. Under **Stale invites**, click **Withdraw**.
-3. Press the glowing **Run changes** button.
+2. On the dashboard, open **Review drafts**: read the cards, edit any you want, then **Approve** them one by one or **Approve all**. They get a green Approved stamp. Under **Stale invites**, click **Withdraw**.
+3. Press **Run changes** and watch the Live run panel as each message goes out.
 4. Answer any replies yourself, then click **They replied** on that person.
 
 ---
@@ -241,6 +253,7 @@ python3 app/store.py --help
 
 - **Your login stays yours.** Never give this tool, or any tool, your LinkedIn password or cookies. You log in in the browser window yourself.
 - **Your data stays local.** Contacts, your profile, backups and logs live in `data/`, which is git-ignored and never uploaded. The dashboard only listens on `127.0.0.1` and rejects requests from other websites.
+- **The live view stays local.** The picture of Claude's browser goes from that browser to the dashboard through the local server only. It is held in memory, never written to disk, and dropped when the run ends.
 - **What does leave your computer:** the pages Claude reads and the messages it writes go to the Claude model (as with any Claude Code session), and searches go to Apollo if you use it.
 - **Other people's data.** The contacts you collect are personal data. Keep only what you use, delete people who ask, and follow the privacy rules where you live (GDPR in the EU).
 - **Page content is treated as data.** Claude is told never to follow instructions found in profiles or messages.
@@ -270,12 +283,15 @@ linkedin-outreach/
 ├── README.md
 ├── LICENSE
 ├── install.py               setup check; optional Playwright, Apollo and macOS app
-├── references/              LinkedIn browser steps, message rules, data model
+├── PRODUCT.md, DESIGN.md    what the dashboard is for, and how it looks
+├── references/              LinkedIn browser steps, live view, message rules, data model
 ├── templates/profile.md     blank profile Claude fills in on the first run
-├── docs/                    the images in this README
+├── docs/                    the images and tutorial video in this README, the logo
 ├── app/
 │   ├── launch.py            start the server and open the dashboard (--if-closed, --stop)
-│   ├── server.py            local server, standard library only
+│   ├── server.py            local server, standard library only (also relays the live view)
+│   ├── live-start.js        mirror Claude's browser tab into the dashboard
+│   ├── live-stop.js         stop mirroring
 │   ├── store.py             data store + CLI
 │   ├── web/index.html       the dashboard, one file
 │   └── launcher.applescript source of the macOS app
