@@ -191,20 +191,20 @@ Claude opens the dashboard and a LinkedIn window. **Log in there yourself** (Lin
 
 ## Using it with Claude
 
-Every time the skill runs, the dashboard opens first (or stays open, if it already is).
+Every time the skill runs, the dashboard opens first (or stays open, if it already is), and Claude starts watching it, so a **Run changes** press reaches Claude for the rest of that session.
 
 | You say | Claude does | You get |
 |---|---|---|
 | **start a campaign for Germany** | Finds companies in your field (hiring ones first), picks 3 to 5 people per company (peers, team leads, recruiters), drops anyone already contacted or blacklisted | A list to approve or trim. Requests then go out at most 15 a day |
 | **run today's outreach** | Checks acceptances and replies, writes thank-you / CV / follow-up drafts, flags stale invites, proposes today's requests | A short summary and drafts waiting on the dashboard |
-| **Watch the Outreach Desk** | Waits in the background for the Run changes button | Hands-free sending for this session |
+| **Watch the Outreach Desk** | Waits in the background for the Run changes button (already started by any of the other requests) | Hands-free sending for this session |
 | **Run the Outreach Desk queue** | Sends what you approved, withdraws what you blacklisted | Cards move as each step finishes |
 | **check who accepted** · **who replied?** | Just that | A list |
 | **draft a reply to Anna** | Writes an answer for you to send yourself | A draft |
 | **open the outreach desk** | Starts and opens the dashboard | |
 
 **A typical day (about 10 minutes):**
-1. Start Claude Code and say **Watch the Outreach Desk**, then **run today's outreach**.
+1. Start Claude Code and say **run today's outreach** (Claude also starts watching the desk).
 2. On the dashboard, open **Review drafts**: read the cards, edit any you want, then **Approve** them one by one or **Approve all**. They get a green Approved stamp. Under **Stale invites**, click **Withdraw**.
 3. Press **Run changes** and watch the Live run panel as each message goes out.
 4. Answer any replies yourself, then click **They replied** on that person.

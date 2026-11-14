@@ -179,6 +179,21 @@ def queue(db=None):
     return items
 
 
+def claim_run(force=False):
+    """Mark the run as started, unless another Claude session has already claimed it.
+    Several sessions can watch the desk; the check and the write happen under one lock,
+    so only one of them gets the run and the messages are never sent twice."""
+    with _locked():
+        db = _read()
+        prev = db.get("meta", {}).get("runRequest") or {}
+        if prev.get("status") == "running" and not force:
+            return None
+        rr = {**prev, "status": "running", "at": now_iso(), "startedAt": now_iso()}
+        db.setdefault("meta", {})["runRequest"] = rr
+        _write(db)
+        return rr
+
+
 def set_run(status, **extra):
     with _locked():
         db = _read()
@@ -232,7 +247,7 @@ def main(argv=None):
     sub.add_parser("blacklist")
     sub.add_parser("queue")
     sp = sub.add_parser("wait-request"); sp.add_argument("--timeout", type=int, default=0, help="seconds, 0 = forever")
-    sub.add_parser("start-run")
+    sp = sub.add_parser("start-run"); sp.add_argument("--force", action="store_true", help="take over a run left 'running' by a session that stopped")
     sp = sub.add_parser("step"); sp.add_argument("n", type=int); sp.add_argument("state", choices=["doing", "done", "failed"]); sp.add_argument("--note", default="")
     sp = sub.add_parser("finish-run"); sp.add_argument("--note", default="")
     a = p.parse_args(argv)
@@ -282,7 +297,9 @@ def main(argv=None):
                 print(json.dumps({"timeout": True})); sys.exit(2)
             time.sleep(3)
     elif a.cmd == "start-run":
-        out = set_run("running", startedAt=now_iso())
+        out = claim_run(a.force)
+        if out is None:
+            sys.exit("Another Claude session is already running this queue. Do nothing; start the watcher again.")
     elif a.cmd == "step":
         try:
             out = run_step(a.n, a.state, a.note)

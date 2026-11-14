@@ -1050,7 +1050,7 @@ function renderLive(){
   setOnce("lvHelp",st==="requested"?`
     <div class="step"><b>If nothing happens</b><span>Open Claude Code in the project where this skill is installed and send this:</span>
       <div class="cmd"><span id="runCmd">${RUN_PROMPT}</span><button class="btn small" id="copyRun">Copy</button></div></div>
-    <div class="step"><b>Make it automatic</b><span>Once per Claude session, send “Watch the Outreach Desk”. From then on, Run changes starts Claude directly.</span></div>
+    <div class="step"><b>Make it automatic</b><span>Claude watches the desk from the first outreach request in a session. If you haven't asked it anything yet, send “Watch the Outreach Desk”. From then on, Run changes starts Claude directly.</span></div>
     <p class="small-note">LinkedIn must be logged in in Claude's browser window. The picture here mirrors that window, so you never need to switch to it.</p>`
     :st==="done"?`<div class="step"><b>${waitingN?`${waitingN} draft${waitingN===1?"":"s"} still waiting for your approval`:"Nothing else is waiting for you"}</b><span>The people in this run have moved to their next stage.</span></div>
     <div class="ctrl">${waitingN?`<button class="btn primary" id="lvReview">Review drafts</button>`:""}<button class="btn" id="lvDoneClose">Close</button></div>`:"");

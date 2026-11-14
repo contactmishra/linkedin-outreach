@@ -9,10 +9,11 @@ The user is looking for a job. One country campaign at a time, they connect with
 
 `<skill>` below means this skill's base directory (given when the skill loads). Run Python with plain `python3` (standard library only), unless the project has its own rule, e.g. a CLAUDE.md that says to use a `.venv`: then use that interpreter.
 
-## Step 0, every time: open the dashboard
-Before anything else:
-`python3 "<skill>/app/launch.py" --if-closed`
-It starts the local server if needed and opens http://localhost:4877, unless a dashboard tab is already open. The user watches it while you work.
+## Step 0, every time: open the dashboard and watch it
+Before anything else, whatever the user asked for:
+1. `python3 "<skill>/app/launch.py" --if-closed`
+   It starts the local server if needed and opens http://localhost:4877, unless a dashboard tab is already open. The user watches it while you work.
+2. **Start the desk watcher** (workflow E) if this session doesn't already have one running. Without it, a **Run changes** press on the dashboard never reaches Claude and the user's approved changes just sit there.
 
 Then check `<skill>/data/profile.md`. If it doesn't exist, run **workflow F (first-time setup)** before anything else.
 
@@ -98,7 +99,7 @@ They can add people by hand (Add person, `source: "Added by hand"`), review draf
 
 ### D. Run the dashboard queue ("Run the Outreach Desk queue", "run my changes")
 The user pressed **Run changes**. That press IS their approval for every item in the queue: don't ask again, do it and report.
-1. `S start-run` (the button shows "Claude is running" and the dashboard's **Live run** panel opens).
+1. `S start-run` (the button shows "Claude is running" and the dashboard's **Live run** panel opens). If it exits with "Another Claude session is already running this queue", that session has the run: do nothing, just start the watcher again. Only if a run was left `running` by a session that stopped, and the user asks you to take over, use `S start-run --force`.
 2. LinkedIn must be open and logged in. If not, ask the user to log in; if they can't now, `S finish-run --note "Stopped: LinkedIn login needed"` and stop.
 3. **Start the live view** so the user watches the work on the dashboard instead of switching windows: on the LinkedIn tab, `browser_run_code_unsafe` with `filename: "<skill>/app/live-start.js"` (`references/live-view.md`). Don't bring the Playwright window to the front during the run.
 4. `S queue`. For each item n (counting from 1): `S step <n> doing`, `S get <id>`, do it, then `S step <n> done` (or `S step <n> failed --note "<why>"` and go on):
@@ -107,11 +108,11 @@ The user pressed **Run changes**. That press IS their approval for every item in
    3 to 8 s between items, about 25 messages a day at most.
 5. Stop the live view (`browser_run_code_unsafe` with `filename: "<skill>/app/live-stop.js"`), also when the run ends early.
 6. `S finish-run --note "<one line>"` and `S meta run '{"lastRun":"<now>","lastRunNote":"..."}'`.
-7. Report in a few lines. If watching (E), start the watcher again.
+7. Report in a few lines, then start the watcher again (workflow E).
 
-### E. Watch the desk ("Watch the Outreach Desk")
+### E. Watch the desk (automatic from Step 0; also "Watch the Outreach Desk")
 Start in the background (Bash with `run_in_background: true`): `python3 "<skill>/app/store.py" wait-request`
-It exits the moment the user presses **Run changes**; that wakes Claude, which does workflow D and starts the watcher again. Watching lasts until this Claude session ends. One watcher at a time.
+It exits the moment the user presses **Run changes**; that wakes Claude, which does workflow D and starts the watcher again. Watching lasts until this Claude session ends. One watcher per session (check your own background tasks before starting another). Other Claude sessions may watch too: `S start-run` lets only the first one take the run, so nothing is sent twice. Tell the user in one line that the desk is being watched.
 
 ### F. First-time setup ("set up linkedin outreach", or `data/profile.md` missing)
 1. Copy `<skill>/templates/profile.md` to `<skill>/data/profile.md`.

@@ -40,7 +40,7 @@ Written by the dashboard's **Run changes** button and by `store.py start-run`, `
 
 | Field | Meaning |
 |---|---|
-| `status` | `requested` (button pressed), `running` (Claude started), `done` |
+| `status` | `requested` (button pressed), `running` (Claude started), `done`. `start-run` refuses (exit 1) while it is `running`, so only one Claude session takes a run; `--force` takes over a stuck one |
 | `at`, `startedAt`, `doneAt` | timestamps of the last change, the start and the end |
 | `items` | the queue at the moment of the press: `{id, name, action, label}` per item, action = `send_thanks`, `send_cv`, `send_followup` or `withdraw` |
 | `items[n].state`, `items[n].note` | set by `store.py step <n> doing|done|failed [--note]`; drives the Live run checklist |
